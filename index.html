@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' https://*.supabase.co; font-src 'self' data:; object-src 'none'; base-uri 'self'">
+  <title>ATLAS | Engineering &amp; Innovation Management</title>
+  <link rel="icon" type="image/png" href="assets/atlas-favicon.png?v=8.4.4">
+  <link rel="stylesheet" href="styles.css?v=8.4.4">
+</head>
+<body>
+<div class="app">
+  <aside id="appSidebar">
+    <div class="brand atlasBrand">
+      <img class="atlasBrandLogo" src="assets/atlas-logo-sidebar.png?v=8.4.4" alt="ATLAS logo">
+      <div class="atlasBrandText">
+        <strong>ATLAS</strong>
+        <span>Engineering &amp; Innovation Management</span>
+        <small data-app-version>v8.4.0</small>
+      </div>
+    </div>
+    <nav class="groupedNav">
+      <button data-view="dashboard" class="active navStandalone">▥ Dashboard</button>
+      <div class="navGroup">
+        <div class="navGroupLabel">Projects</div>
+        <button data-view="projects" class="navChild">▣ Product Initiatives</button>
+        <button data-view="roadmap" class="navChild">▤ Initiative Roadmap</button>
+      </div>
+      <div class="navGroup">
+        <div class="navGroupLabel">Development Support</div>
+        <button data-view="development" class="navChild">⌘ Development Support</button>
+        <button data-view="developmentRoadmap" class="navChild">▤ Development Roadmap</button>
+      </div>
+      <button data-view="resources" class="navStandalone">♙ Resources</button>
+      <button data-view="reports" class="navStandalone">▦ Reports</button>
+      <button data-view="settings" class="navStandalone">⚙ Settings</button>
+    </nav>
+    <div id="connectionBadge" class="connection offline">Loading Supabase…</div>
+  </aside>
+  <main>
+    <header class="appHeader">
+      <div class="mobileHeaderStart">
+        <button id="mobileMenuButton" class="mobileMenuButton" type="button" aria-label="Open navigation" aria-controls="appSidebar" aria-expanded="false">☰</button>
+        <div class="headerTitleBlock">
+          <h1 id="pageTitle">Fiscal Year Product Initiatives</h1>
+          <p id="pageSubtitle">Evaluate, cost, prioritize, and schedule engineering initiatives.</p>
+        </div>
+      </div>
+      <div class="headerActions">
+        <div class="headerStatusGroup" aria-label="Application status">
+          <span class="mobileVersionBadge" data-app-version>v8.2.6</span>
+          <span id="mobileConnectionBadge" class="mobileConnectionBadge">Loading Supabase…</span>
+        </div>
+        <button id="newProject" class="primary newProjectButton"><span aria-hidden="true">＋</span><span class="newProjectLabel">New Product Initiative</span></button>
+      </div>
+    </header>
+
+    <section id="dashboardView" class="view">
+      <section class="projectMixPanel" aria-labelledby="projectMixTitle">
+        <div class="projectMixHead">
+          <div><h2 id="projectMixTitle">Initiative Mix by Quarter <span class="projectMixInfo" title="Product initiatives are assigned to a fiscal quarter from their planned start date.">i</span></h2><span>Percentage of product initiatives by delivery model based on planned start date</span></div><div class="projectMixYearControl"><label for="projectMixYear">Fiscal Year</label><select id="projectMixYear" aria-label="Initiative mix fiscal year"></select></div>
+        </div>
+        <div id="projectMix" class="projectMix"></div>
+      </section>
+      <section class="panel skunkworksPanel" aria-labelledby="skunkworksTitle">
+        <div class="panelHead"><div><h2 id="skunkworksTitle">Skunkworks Product Initiatives</h2><span>Experimental and rapid-development initiatives</span></div><strong id="skunkworksTotal">0 initiatives</strong></div>
+        <div class="tableWrap"><table><thead><tr><th>Product Initiative</th><th>Status</th><th>Division</th><th>Champion</th><th>Start</th></tr></thead><tbody id="skunkworksRows"></tbody></table></div>
+      </section>
+      <div class="executiveDashboardGrid operationalDashboardGrid">
+        <section class="panel">
+          <div class="panelHead"><div><h2>Product Initiative Pipeline</h2><span>Current Product Initiatives grouped by delivery status</span></div></div>
+          <div id="initiativePipelineChart" class="barChart executiveBarChart"></div>
+        </section>
+        <section class="panel">
+          <div class="panelHead"><div><h2>Fiscal Development Support Issues</h2><span id="fiscalIssuesSubtitle">Cloud and Edge totals for the selected fiscal year</span></div></div>
+          <div id="fiscalIssueKpis" class="kpis fiscalIssueKpis" aria-label="Fiscal Development Support issue totals"></div>
+        </section>
+      </div>
+      <section class="panel workItemsAreaPanel" aria-labelledby="workItemsAreaTitle">
+        <div class="panelHead">
+          <div><h2 id="workItemsAreaTitle">Development Support Items by Area</h2><span id="workItemsAreaSubtitle">Development Support items for the selected fiscal year</span></div>
+          <strong id="workItemsAreaTotal" class="workItemsAreaTotal">0 items</strong>
+        </div>
+        <div id="workItemsAreaChart" class="workItemsAreaChart"></div>
+      </section>
+    </section>
+
+    <section id="projectsView" class="view hidden">
+      <section class="panel productInitiativesPanel"><div class="panelHead toolbar"><div><h2>Product Initiatives</h2><span>Click any row to edit the product initiative and its business case</span></div><input id="projectSearch" placeholder="Search product initiatives"></div><div class="horizontalScrollControls" aria-label="Product Initiatives table horizontal scroll controls"><button id="projectScrollLeft" class="horizontalScrollButton" type="button" aria-label="Scroll Product Initiatives left">←</button><div id="projectTopScroll" class="horizontalTopScroll" aria-hidden="true"><div id="projectTopScrollInner"></div></div><button id="projectScrollRight" class="horizontalScrollButton" type="button" aria-label="Scroll Product Initiatives right">→</button></div><div id="projectTableScroll" class="tableWrap horizontalSliderTarget"><table class="productInitiativesTable"><thead><tr><th>Product Initiative</th><th>Division</th><th>Champion</th><th>Quadrant</th><th>Priority</th><th>Duration</th><th>Total Spend</th><th>ROI</th><th>Start</th></tr></thead><tbody id="projectRows"></tbody></table></div></section>
+    </section>
+
+
+    <section id="roadmapView" class="view hidden">
+      <section class="panel roadmapPanel"><div class="panelHead toolbar"><div><h2>Initiative Roadmap</h2><span>Calculated initiative timing, milestones, and dependencies</span></div><div class="roadmapExportControls"><div class="roadmapPeriodToggle" role="group" aria-label="Initiative roadmap year basis"><button id="roadmapFiscalMode" class="periodToggle active" type="button" aria-pressed="true">Fiscal Year</button><button id="roadmapCalendarMode" class="periodToggle" type="button" aria-pressed="false">Calendar Year</button></div><select id="roadmapYear" aria-label="Initiative roadmap year"></select><select id="roadmapYearSpan" aria-label="Years to display"><option value="1">1 year</option><option value="2">2 years</option><option value="3">3 years</option></select><button id="downloadRoadmapPng" class="secondary exportCompactButton" type="button" title="Download PNG" aria-label="Download PNG">PNG</button><button id="downloadRoadmapPdf" class="primary exportCompactButton" type="button" title="Download PDF" aria-label="Download PDF">PDF</button></div></div><div class="roadmapLegend"><span><i class="legendSwatch legendDev"></i>Development</span><span><i class="legendSwatch legendTest"></i>Testing — NPD only</span><span>● Start</span><span>★ Finish</span></div><div class="horizontalScrollControls" aria-label="Initiative Roadmap horizontal scroll controls"><button id="roadmapScrollLeft" class="horizontalScrollButton" type="button" aria-label="Scroll Initiative Roadmap left">←</button><div id="roadmapTopScroll" class="horizontalTopScroll" aria-hidden="true"><div id="roadmapTopScrollInner"></div></div><button id="roadmapScrollRight" class="horizontalScrollButton" type="button" aria-label="Scroll Initiative Roadmap right">→</button></div><div id="roadmapGrid" class="roadmap horizontalSliderTarget"></div></section>
+    </section>
+
+
+    <section id="developmentView" class="view hidden">
+      <section id="developmentKpis" class="kpis developmentKpis"></section>
+      <section class="panel">
+        <div class="panelHead toolbar developmentToolbar">
+          <div><h2>Development Support</h2><span>Track bugs, enhancements, tasks, releases, and product support work</span></div>
+          <div class="developmentActions">
+            <button id="downloadDevelopmentCsv" class="secondary" type="button">Download CSV</button>
+            <button id="uploadDevelopmentCsv" class="secondary" type="button">Upload CSV</button>
+            <input id="developmentCsvFile" type="file" accept=".csv,text/csv" hidden>
+            <button id="newDevelopmentItem" class="primary" type="button">＋ New Item</button>
+          </div>
+        </div>
+        <div class="developmentScrollControls" aria-label="Development Support table horizontal scroll controls">
+          <button id="developmentScrollLeft" class="developmentScrollButton" type="button" aria-label="Scroll development table left">←</button>
+          <div id="developmentTopScroll" class="developmentTopScroll" aria-hidden="true"><div id="developmentTopScrollInner"></div></div>
+          <button id="developmentScrollRight" class="developmentScrollButton" type="button" aria-label="Scroll development table right">→</button>
+        </div>
+        <div id="developmentTableScroll" class="tableWrap developmentTableWrap"><table class="developmentTable"><thead><tr><th>Source</th><th>Department</th><th>Release</th><th>When</th><th>Area</th><th>Category</th><th>Product Initiative</th><th>Title</th><th>Assignees</th><th>Status</th><th>Size</th><th>Labels</th><th>Priority</th></tr></thead><tbody id="developmentRows"></tbody></table></div>
+      </section>
+    </section>
+
+    <section id="developmentRoadmapView" class="view hidden">
+      <section class="panel developmentRoadmapPanel">
+        <div class="panelHead toolbar">
+          <div><h2>Development Roadmap</h2><span>Development Support work displayed across fiscal or calendar periods</span></div>
+          <div class="roadmapExportControls developmentRoadmapToolbar">
+            <div class="roadmapPeriodToggle" role="group" aria-label="Development roadmap year basis">
+              <button id="developmentRoadmapFiscalMode" class="periodToggle active" type="button" aria-pressed="true">Fiscal Year</button>
+              <button id="developmentRoadmapCalendarMode" class="periodToggle" type="button" aria-pressed="false">Calendar Year</button>
+            </div>
+            <select id="developmentRoadmapYear" aria-label="Development roadmap year"></select>
+            <select id="developmentRoadmapYearSpan" aria-label="Years to display"><option value="1">1 year</option><option value="2">2 years</option><option value="3">3 years</option></select>
+          </div>
+        </div>
+        <div class="developmentRoadmapFilters" aria-label="Development roadmap filters">
+          <select id="devRoadmapDepartment"><option value="all">All departments</option></select>
+          <select id="devRoadmapRelease"><option value="all">All releases</option></select>
+          <select id="devRoadmapArea"><option value="all">All areas</option></select>
+          <select id="devRoadmapCategory"><option value="all">All categories</option></select>
+          <select id="devRoadmapStatus"><option value="all">All statuses</option></select>
+          <select id="devRoadmapPriority"><option value="all">All priorities</option></select>
+          <label class="developmentRoadmapToggle"><input id="developmentRoadmapShowUnscheduled" type="checkbox"> Show Unscheduled</label>
+          <button id="clearDevelopmentRoadmapFilters" class="secondary" type="button">Clear Filters</button>
+        </div>
+        <div class="developmentRoadmapLegend">
+          <span><i class="devRoadmapSwatch status-complete"></i>Completed / Closed</span>
+          <span><i class="devRoadmapSwatch status-active"></i>Active / In Progress</span>
+          <span><i class="devRoadmapSwatch status-open"></i>Open / Planned</span>
+          <span><i class="devRoadmapSwatch status-blocked"></i>Blocked</span>
+          <span>● Start</span><span>★ Finish</span>
+        </div>
+        <div class="horizontalScrollControls" aria-label="Development Roadmap horizontal scroll controls">
+          <button id="developmentRoadmapScrollLeft" class="horizontalScrollButton" type="button" aria-label="Scroll Development Roadmap left">←</button>
+          <div id="developmentRoadmapTopScroll" class="horizontalTopScroll" aria-hidden="true"><div id="developmentRoadmapTopScrollInner"></div></div>
+          <button id="developmentRoadmapScrollRight" class="horizontalScrollButton" type="button" aria-label="Scroll Development Roadmap right">→</button>
+        </div>
+        <div id="developmentRoadmapGrid" class="developmentRoadmapGrid horizontalSliderTarget"></div>
+      </section>
+    </section>
+
+    <section id="resourcesView" class="view hidden">
+      <section class="panel"><div class="panelHead toolbar"><div><h2>Resource Capacity</h2><span>Loaded rates and monthly availability drive labor cost and duration</span></div><div class="resourceCsvControls"><button id="downloadResourcesCsv" class="secondary" type="button">Download CSV</button><button id="uploadResourcesCsv" class="secondary" type="button">Upload CSV</button><input id="resourceCsvFile" type="file" accept=".csv,text/csv" hidden><button id="addResource" class="secondary">＋ Add Resource</button></div></div><div class="tableWrap"><table><thead><tr><th>Name</th><th>Role</th><th>Department</th><th>Loaded Rate</th><th>Hours / Month</th><th>Assigned</th><th>Utilization</th><th></th></tr></thead><tbody id="resourceRows"></tbody></table></div></section>
+    </section>
+
+
+    <section id="reportsView" class="view hidden">
+      <section class="quarterReport" id="quarterReport">
+        <div class="quarterReportHeader">
+          <div><h1>Year / Quarter Report</h1><h2 id="quarterReportPeriod">Selected fiscal period</h2><p id="quarterReportDescription">Overview of project performance, timeline, and status for the selected fiscal period.</p></div>
+          <div class="quarterReportActions"><span id="quarterReportGenerated"></span><button id="downloadQuarterReportPdf" class="secondary exportCompactButton" type="button" title="Download PDF" aria-label="Download PDF">PDF</button></div>
+        </div>
+        <div class="quarterReportPanel">
+          <div class="quarterFilters">
+            <label>Fiscal Year<select id="quarterReportYear"></select></label>
+            <label>Quarter<select id="quarterReportQuarter"></select></label>
+            <label>Division<select id="quarterReportDivision"><option value="all">All</option></select></label>
+            <label>Champion<select id="quarterReportChampion"><option value="all">All</option></select></label>
+            <label>Status<select id="quarterReportStatus"><option value="all">All</option><option>Completed</option><option>In Process</option><option>On Hold</option><option>At Risk</option><option>Not Started</option><option>Parking Lot</option></select></label>
+            <button id="clearQuarterReportFilters" class="secondary" type="button">Clear Filters</button>
+          </div>
+          <div id="quarterReportKpis" class="quarterReportKpis"></div>
+          <div class="quarterReportTableWrap"><table class="quarterReportTable"><thead id="quarterReportHead"></thead><tbody id="quarterReportRows"></tbody></table></div>
+        </div>
+        <section id="parkingLotReportSection" class="parkingLotReportSection">
+          <div class="parkingLotReportHeader"><div><h3>Parking Lot Initiatives</h3><p>Deferred initiatives are tracked here and excluded from the active delivery timeline.</p></div><span id="parkingLotReportCount" class="parkingLotCount">0 initiatives</span></div>
+          <div class="parkingLotTableWrap"><table class="parkingLotTable"><thead><tr><th>Product Initiative</th><th>Division</th><th>Champion</th><th>Category</th><th>Alignment</th><th>Estimated Spend</th><th>Planned Start</th></tr></thead><tbody id="parkingLotReportRows"></tbody></table></div>
+        </section>
+        <div class="quarterReportFooter">
+          <section><h3>Status Legend</h3><div class="quarterLegend"><span><b class="reportStatus completed">Completed</b><small>Project completed</small></span><span><b class="reportStatus in-process">In Process</b><small>Active and progressing</small></span><span><b class="reportStatus on-hold">On Hold</b><small>Paused or blocked</small></span><span><b class="reportStatus at-risk">At Risk</b><small>Schedule or delivery risk</small></span><span><b class="reportStatus not-started">Not Started</b><small>Work has not started</small></span></div></section>
+          <section><h3 id="quarterReportSummaryTitle">Period Summary</h3><ul id="quarterReportSummary"></ul></section>
+        </div>
+      </section>
+    </section>
+
+    <section id="settingsView" class="view hidden">
+      <section class="panel settingsPanel"><div class="panelHead"><div><h2>Supabase Connection</h2><span>Shared database configuration is built into this application for use on every device.</span></div></div><div class="settingsForm"><div class="message success">Supabase is configured automatically. No device-specific setup is required.</div><div id="settingsMessage" class="message"></div></div></section>
+      <section class="panel"><div class="panelHead"><div><h2>Formula Defaults</h2><span>Used for new projects and preliminary estimates</span></div></div><div class="settingsForm grid"><label>Productive hours / FTE / month<input id="productiveHours" type="number" value="140"></label><label>Default gross margin %<input id="defaultMargin" type="number" value="35"></label><label>Low uncertainty contingency %<input id="cont1" type="number" value="10"></label><label>Medium uncertainty contingency %<input id="cont2" type="number" value="20"></label><label>High uncertainty contingency %<input id="cont3" type="number" value="35"></label><button id="saveFormulaSettings" class="primary">Save Formula Settings</button></div></section>
+    </section>
+  </main>
+</div>
+<div id="mobileNavBackdrop" class="mobileNavBackdrop" hidden></div>
+
+<div id="projectOverlay" class="overlay hidden"><div class="drawer wide"><div class="drawerHead"><div><h2 id="drawerTitle">New Product Initiative</h2><p>Business case, scoring, resource assignment, and initiative schedule</p></div><button data-close="projectOverlay" class="icon">×</button></div><div class="tabs"><button data-tab="overview" class="active">Overview</button><button data-tab="scoring">Initiative Score</button><button data-tab="financials">Initiative Evaluation</button><button data-tab="team">Team & Schedule</button><button data-tab="governance">Governance</button></div><form id="projectForm" class="form">
+  <div id="tab-overview" class="tabPane"><label>Product initiative name<input id="name" required placeholder="Enter product initiative name"></label><label>Description<textarea id="description" rows="4" placeholder="Problem, proposed solution, and intended outcome"></textarea></label><div class="grid"><label>Division<select id="division"><option>IDS</option><option>FENG</option><option>Software</option><option>Operations</option><option>VendNet</option><option>Corporate</option></select></label><label>Category<select id="category"><option value="NPD">NPD — New Product Development</option><option value="CI">CI — Continuous Improvement</option><option value="DPT">Skunkworks — Experimental / rapid development</option></select></label><label>Status<select id="status"><option>Proposed</option><option>Approved</option><option>Active</option><option>On Hold</option><option>Completed</option><option>Parking Lot</option></select></label><label>Champion<select id="champion"><option value="Unassigned">Unassigned</option></select></label><label>Executive sponsor<select id="sponsor"><option value="">No sponsor selected</option></select></label><label>Start month<input id="startDate" type="month"></label></div><section class="linkedDevelopmentSection"><h3>Linked Development Support</h3><p class="hint">Bugs, enhancements, and support work associated with this product initiative.</p><div id="linkedDevelopmentItems" class="linkedDevelopmentItems"></div></section></div>
+  <div id="tab-financials" class="tabPane hidden">
+    <div class="calculationSourceInputs" aria-hidden="true">
+      <input id="hours" type="number" value="400" tabindex="-1">
+      <input id="loadedRate" type="number" value="120" tabindex="-1">
+      <input id="externalCost" type="number" value="25000" tabindex="-1">
+      <input id="capex" type="number" value="0" tabindex="-1">
+      <input id="year1Revenue" type="number" value="250000" tabindex="-1">
+      <input id="year2Revenue" type="number" value="275000" tabindex="-1">
+      <input id="year3Revenue" type="number" value="302500" tabindex="-1">
+      <input id="annualSavings" type="number" value="0" tabindex="-1">
+      <input id="grossMargin" type="number" value="35" tabindex="-1">
+      <select id="uncertainty" tabindex="-1"><option value="1">1 — High knowledge</option><option value="2">2 — Some research</option><option value="3">3 — High uncertainty</option></select>
+    </div>
+  </div>
+  <div id="tab-scoring" class="tabPane hidden"><div class="grid scoreGrid"></div><p class="hint">Design/Production scoring uses Project Type, Cost Amount, Impact/Lift, Technical Risk, and Production Risk. CapEx remains a financial input and is not scored.</p><div class="scoreFormula"><b>Priority weighting:</b> Impact/Lift 40% · Project Type 20% · Cost Amount 15% · Technical Risk 12.5% · Production Risk 12.5%</div></div>
+  <div id="tab-team" class="tabPane hidden">
+  <h3>Resource assignments</h3>
+  <p class="assignmentHelp">Assign people, their initiative role, monthly allocation, and the period they will contribute.</p>
+  <div class="assignmentTableWrap">
+    <div class="assignmentHeader" aria-hidden="true">
+      <span>Resource</span><span>Department</span><span>Role</span><span>Allocation %</span><span>Start</span><span>Finish</span><span>Remove</span>
+    </div>
+    <div id="assignmentRows"></div>
+  </div>
+  <button id="addAssignment" type="button" class="secondary">＋ Add Resource</button>
+  <h3>Calculated schedule</h3><div id="schedulePreview" class="schedulePreview"></div>
+</div>
+
+  <div id="tab-governance" class="tabPane hidden">
+    <div class="grid"><label>Approval stage<select id="approvalStage"><option>Draft</option><option>Department Review</option><option>Finance Review</option><option>Executive Review</option><option>Approved</option><option>Rejected</option></select></label><label>Decision owner<input id="decisionOwner" placeholder="Approver or review board"></label><label>Decision date<input id="decisionDate" type="date"></label><label>Target completion<input id="targetDate" type="month"></label></div>
+    <h3>Milestones</h3><div id="milestoneRows"></div><button id="addMilestone" type="button" class="secondary">＋ Add Milestone</button>
+    <h3>Dependencies</h3><div id="dependencyRows"></div><button id="addDependency" type="button" class="secondary">＋ Add Dependency</button>
+    <h3>Risks</h3><div id="riskRows"></div><button id="addRisk" type="button" class="secondary">＋ Add Risk</button>
+  </div>
+  <div id="estimate" class="estimate"></div>
+</form><div class="actions"><button id="deleteProject" class="danger hidden" type="button">Delete</button><span class="spacer"></span><button data-close="projectOverlay" type="button">Cancel</button><button id="saveProject" class="primary" type="button">Save Product Initiative</button></div></div></div>
+
+
+<div id="developmentOverlay" class="overlay hidden"><div class="drawer wide"><div class="drawerHead"><div><h2 id="developmentDrawerTitle">New Development Support Item</h2><p>Bug, enhancement, task, or production support work</p></div><button data-close="developmentOverlay" class="icon">×</button></div><form id="developmentForm" class="form">
+  <div class="grid">
+    <label>Source line<input id="devSourceLine" type="number" min="0" required></label>
+    <label>Department<select id="devDepartment"><option>Cloud</option><option>Edge</option></select></label>
+    <label>Release<input id="devRelease" placeholder="Iteration 27"></label>
+    <label>Start date<input id="devStartDate" type="date"></label>
+    <label>End date<input id="devEndDate" type="date"></label>
+    <label>Area<input id="devArea" placeholder="Reports / Exports"></label>
+    <label>Category<select id="devCombinedType"><option>Bug</option><option>Enhancement</option><option>Task</option><option>Other</option></select></label>
+    <label>Linked Product Initiative<select id="devProjectId"><option value="">No linked initiative</option></select></label>
+    <label>Status<select id="devStatus"><option>Open</option><option>In Progress</option><option>Blocked</option><option>Review</option><option>Closed</option></select></label>
+    <label>Size<select id="devSize"><option value="">Unspecified</option><option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option></select></label>
+    <label>Priority<select id="devPriority"><option>Critical Priority</option><option>High Priority</option><option>Medium Priority</option><option>Low Priority</option></select></label>
+  </div>
+  <label>Title<input id="devTitle" required placeholder="Describe the bug, enhancement, or task"></label>
+  <div class="grid">
+    <label>Issue URL<input id="devUrl" type="url" placeholder="https://github.com/..."></label>
+    <label>Linked pull requests<input id="devPullRequests" placeholder="One or more pull request URLs"></label>
+    <label>Assignees<input id="devAssignees" placeholder="Comma-separated names"></label>
+    <label>Labels<input id="devLabels" placeholder="Bug, Committed, HIGH PRIORITY"></label>
+  </div>
+</form><div class="actions"><button id="deleteDevelopmentItem" class="danger hidden" type="button">Delete</button><span class="spacer"></span><button data-close="developmentOverlay" type="button">Cancel</button><button id="saveDevelopmentItem" class="primary" type="button">Save Item</button></div></div></div>
+
+<div id="resourceOverlay" class="overlay hidden"><div class="drawer small"><div class="drawerHead"><div><h2>Resource</h2><p>Capacity and labor costing profile</p></div><button data-close="resourceOverlay" class="icon">×</button></div><form class="form"><label>Name<input id="resourceName"></label><label>Role<input id="resourceRole"></label><label>Department<input id="resourceDepartment"></label><label>Loaded hourly rate<input id="resourceRate" type="number" value="120"></label><label>Available hours per month<input id="resourceHours" type="number" value="140"></label></form><div class="actions"><button id="deleteResource" class="danger hidden" type="button">Delete Resource</button><span class="spacer"></span><button data-close="resourceOverlay" type="button">Cancel</button><button id="saveResource" class="primary" type="button">Save Resource</button></div></div></div>
+
+<script defer src="supabase-config.js?v=8.4.4"></script>
+<script defer src="supabase-client.js?v=8.4.4"></script>
+<script defer src="supabase-service.js?v=8.4.4"></script>
+<script defer src="version.js?v=8.4.4"></script>
+<script defer src="app.js?v=8.4.4"></script>
+<script defer src="v03.js?v=8.4.4"></script>
+<script defer src="v04.js?v=8.4.4"></script>
+<script defer src="v05.js?v=8.4.4"></script>
+<script defer src="v06.js?v=8.4.4"></script>
+<script defer src="v07.js?v=8.4.4"></script>
+<script defer src="v08.js?v=8.4.4"></script>
+<script defer src="v09.js?v=8.4.4"></script>
+<script defer src="v10.js?v=8.4.4"></script>
+<script defer src="v11.js?v=8.4.4"></script>
+<script defer src="v12.js?v=8.4.4"></script>
+<script defer src="v13.js?v=8.4.4"></script>
+<script defer src="v14.js?v=8.4.4"></script>
+<script defer src="v15.js?v=8.4.4"></script>
+<script defer src="development.js?v=8.4.4"></script>
+<script defer src="v16.js?v=8.4.4"></script>
+<script defer src="mobile.js?v=8.4.4"></script>
+</body></html>
