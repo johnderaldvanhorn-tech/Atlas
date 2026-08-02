@@ -77,6 +77,6 @@
   $('#addAction').onclick=()=>{$('#actionRows').insertAdjacentHTML('beforeend',actionHtml());bindExecutionRows();};
   $('#addStatusReport').onclick=()=>{$('#statusReportRows').insertAdjacentHTML('beforeend',reportHtml());bindExecutionRows();};
   ['percentComplete','actualInternal','actualExternal','actualCapex','forecastDate'].forEach(id=>$('#'+id).addEventListener('input',renderVariancePreview));
-  $('#exportPortfolio').onclick=exportPortfolio;
+  if ($('#exportPortfolio')) $('#exportPortfolio').onclick=exportPortfolio;
   render();
 })();

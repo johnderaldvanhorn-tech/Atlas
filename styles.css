@@ -786,3 +786,2461 @@ th{color:#526079;background:#f1f5f9}
 .quarterTypeBadge{justify-self:start;padding:4px 8px;border-radius:999px;background:#e0f2fe;color:#1e3a8a;font-size:11px;font-weight:800}
 .quarterDrilldownEmpty{padding:18px 16px;color:#64748b;font-size:13px}
 @media(max-width:850px){.quarterDrilldownSummary{grid-template-columns:repeat(2,minmax(130px,1fr))}.quarterDrilldownGroup{overflow-x:auto}.quarterDrilldownHeader,.quarterDrilldownRow{min-width:850px}}
+
+/* v8.5.0 — Year / Quarter and Executive reporting */
+.reportModeTabs{display:flex;gap:8px;margin:0 0 18px;padding:5px;background:#e8edf5;border:1px solid #d4deec;border-radius:12px;width:max-content}.reportModeTabs button{border:0;background:transparent;color:#526079;border-radius:8px;padding:10px 16px;font-weight:750}.reportModeTabs button.active{background:#fff;color:#172033;box-shadow:0 1px 4px rgba(15,23,42,.12)}
+.executiveReport{color:#172033}.executiveReportHeader{display:flex;justify-content:space-between;gap:24px;align-items:flex-start;margin-bottom:16px}.executiveReportHeader h1{font-size:30px;margin:4px 0 6px}.executiveReportHeader p{margin:0;color:#60708b}.executiveEyebrow,.executiveSectionLabel{display:block;color:#89774d;font-size:11px;font-weight:850;letter-spacing:.12em;text-transform:uppercase}.executiveReportActions{display:flex;align-items:center;gap:12px;color:#60708b;font-size:12px}.executiveControlPanel{display:grid;grid-template-columns:repeat(5,minmax(130px,1fr)) auto;gap:12px;align-items:end;padding:14px;background:#fff;border:1px solid #dbe3f1;border-radius:12px;margin-bottom:16px}.executiveControlPanel label{display:grid;gap:6px;font-size:11px;font-weight:750;color:#43516a}.executiveControlPanel input,.executiveControlPanel select{height:40px}.executiveHero{display:grid;grid-template-columns:1.7fr .65fr;gap:18px;padding:25px 28px;background:#172033;color:#fff;border-radius:14px;margin-bottom:16px}.executiveHero h2{font-size:25px;margin:7px 0 9px}.executiveHero p{margin:0;color:#d9e2f1;line-height:1.6}.executiveGrowthBlock{border-left:1px solid rgba(255,255,255,.2);padding-left:24px;display:flex;flex-direction:column;justify-content:center}.executiveGrowthBlock span{font-size:12px;color:#c7d1e0}.executiveGrowthBlock strong{font-size:42px;margin:6px 0}.executiveGrowthBlock small{color:#c7d1e0}.executiveKpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:16px}.executiveKpi{background:#fff;border:1px solid #dbe3f1;border-radius:12px;padding:15px}.executiveKpi span{display:block;color:#60708b;font-size:11px;font-weight:700;text-transform:uppercase}.executiveKpi strong{display:block;font-size:25px;margin:6px 0 2px}.executiveKpi small{color:#718096;font-size:11px}.executiveReportGrid{display:grid;grid-template-columns:1.12fr .88fr;gap:16px}.executiveBoardCard{background:#fff;border:1px solid #dbe3f1;border-radius:12px;padding:20px;min-height:260px}.executiveCardHead{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:17px}.executiveCardHead h2{font-size:20px;margin:4px 0 0}.executiveCardPeriod{color:#60708b;font-size:12px}.executiveRevenueCard{grid-row:auto;align-self:start}.executiveRevenueVisual{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:end;height:300px;padding:28px 30px 8px;border-bottom:1px solid #e5eaf2;background:repeating-linear-gradient(to top,#f8fafc 0,#f8fafc 59px,#e8edf4 60px)}.revenueBar{height:100%;display:flex;align-items:flex-end;justify-content:center}.revenueBar span{display:block;width:72%;height:10%;min-height:8px;max-height:100%;background:#8d5bb4;border-radius:7px 7px 0 0;transition:height .25s ease}.revenueBar.current span{background:#0f80c9}.revenueLabels{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;text-align:center;color:#60708b;font-size:12px}.revenueLabels b{display:block;color:#172033;font-size:15px;margin-top:3px}.executiveConnectionLine{display:flex;justify-content:space-between;align-items:center;padding-top:18px;color:#60708b}.executiveConnectionLine strong{font-size:22px;color:#007f5f}.executiveDeliverableList{display:grid;gap:10px}.executiveDeliverable{display:grid;grid-template-columns:10px 1fr auto;gap:10px;align-items:start;padding:10px 0;border-bottom:1px solid #edf1f6}.executiveDeliverable:last-child{border-bottom:0}.executiveDeliverable i{width:9px;height:9px;border-radius:50%;background:#0ea5e9;margin-top:5px}.executiveDeliverable.completed i{background:#10b981}.executiveDeliverable.risk i{background:#ef4444}.executiveDeliverable strong{display:block;font-size:13px}.executiveDeliverable small{display:block;color:#718096;margin-top:3px}.executiveDeliverable em{font-size:11px;color:#60708b;font-style:normal;white-space:nowrap}.executiveEmpty{color:#718096;padding:18px 0;font-size:13px}
+@media(max-width:1100px){.executiveControlPanel{grid-template-columns:repeat(3,1fr)}.executiveKpis{grid-template-columns:repeat(3,1fr)}.executiveReportGrid{grid-template-columns:1fr}.executiveRevenueCard{grid-row:auto}.executiveHero{grid-template-columns:1fr}.executiveGrowthBlock{border-left:0;border-top:1px solid rgba(255,255,255,.2);padding:18px 0 0}}
+@media(max-width:700px){.reportModeTabs{width:100%}.reportModeTabs button{flex:1}.executiveReportHeader{flex-direction:column}.executiveControlPanel{grid-template-columns:1fr 1fr}.executiveControlPanel button{grid-column:1/-1}.executiveKpis{grid-template-columns:1fr 1fr}.executiveRevenueVisual{height:240px;padding-left:12px;padding-right:12px}}
+@media print{body *{visibility:hidden!important}#reportsView,#reportsView *{visibility:visible!important}#reportsView{position:absolute!important;left:0;top:0;width:100%;background:#fff}.appShell>aside,.topbar,.reportModeTabs,.executiveControlPanel,.quarterFilters,.quarterReportActions,.executiveReportActions{display:none!important}.hidden{display:none!important}.executiveReportGrid{grid-template-columns:1.1fr .9fr}.executiveBoardCard{break-inside:avoid}.executiveHero{-webkit-print-color-adjust:exact;print-color-adjust:exact}.quarterReportTableWrap{overflow:visible}.quarterReportTable{min-width:0;font-size:9px}}
+
+
+/* ATLAS 8.5.1 scorecard */
+.scorecardPanel{overflow:hidden}.scorecardMessage{min-height:0;padding:0 20px;font-size:13px}.scorecardMessage.success,.scorecardMessage.error{padding-top:12px}.scorecardMessage.success{color:#166534}.scorecardMessage.error{color:#b42318}.scorecardTable td:first-child{min-width:220px;white-space:normal}.scorecardTable td:first-child strong{display:block}.scorecardStatus{display:inline-flex;padding:5px 9px;border-radius:999px;font-size:11px;font-weight:750}.scorecardStatus.on-target{background:#dcfce7;color:#166534}.scorecardStatus.needs-attention{background:#fef3c7;color:#92400e}.scorecardStatus.off-target{background:#fee2e2;color:#991b1b}@media(max-width:760px){#scorecardView .panelHead.toolbar{align-items:stretch}.scorecardTable{min-width:1050px}}
+
+/* ATLAS 8.5.2 — weekly executive scorecard */
+#scorecardView .tableWrap{overflow-x:auto;background:#fff}
+.scorecardTable{min-width:1450px;border-collapse:separate;border-spacing:0}
+.scorecardTable th,.scorecardTable td{border-right:1px solid #e5e7eb;border-bottom:1px solid #e5e7eb;padding:14px 12px;vertical-align:middle}
+.scorecardTable th{background:#fff;color:#6b7280;font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;white-space:nowrap}
+.scorecardTable td{background:#fff;font-size:13px;color:#30343b;white-space:nowrap}
+.scorecardTable .scoreMetricHead,.scorecardTable .scoreMetricCell{position:sticky;left:0;z-index:3;background:#fff;min-width:240px}
+.scorecardTable .scoreMetricHead{z-index:4}
+.scoreMetricCell{display:flex;align-items:center;gap:12px}.scoreMetricCell strong{font-size:14px}.scoreDrag{border:0;background:transparent;color:#a0a5ad;padding:0;letter-spacing:-2px;cursor:grab}
+.scoreWeekHead{min-width:118px;text-align:left;line-height:1.25}.scoreTarget{font-weight:750;line-height:1.45}.scoreAverage,.scoreWeekCell{font-weight:800;text-align:center;position:relative}.scoreAverage.met,.scoreWeekCell.met{color:#10a84f}.scoreAverage.missed,.scoreWeekCell.missed{color:#ff252d}.scoreWeekCell{cursor:pointer}.scoreWeekCell:hover{background:#f8fafc}.scoreWeekCell.empty{color:#9ca3af}.scoreCorner{position:absolute;left:0;top:0;width:0;height:0;border-top:9px solid #b7b9bd;border-right:9px solid transparent}.scoreMore{border:0;background:transparent;font-size:20px;color:#3f4650;padding:2px 7px}.scorecardTable tbody tr:hover td{background:#fbfcfe}.scorecardTable tbody tr:hover .scoreMetricCell{background:#fbfcfe}
+
+/* ATLAS 8.5.3 — scorecard historical week navigation */
+.scorecardHeader{gap:18px;align-items:center}.scorecardActions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.scorecardPeriodControls{display:flex;align-items:flex-end;gap:8px;flex-wrap:wrap}.scorecardPeriodControls label{display:flex;flex-direction:column;gap:4px;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#6b7280}.scorecardPeriodControls select,.scorecardPeriodControls button{height:38px}.scorecardPeriodControls select{min-width:86px}.scorecardPeriodControls button:disabled{opacity:.45;cursor:not-allowed}@media(max-width:900px){.scorecardHeader{align-items:flex-start}.scorecardActions{width:100%;justify-content:space-between}.scorecardPeriodControls{width:100%}}
+
+.executiveScorecardSource{
+  display:grid;
+  gap:6px;
+  align-content:center;
+  min-height:40px;
+  padding:0 12px;
+  border-left:1px solid #dbe3f1;
+}
+
+.executiveScorecardSource span{
+  color:#43516a;
+  font-size:11px;
+  font-weight:750;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+}
+
+.executiveScorecardSource strong{
+  color:#172033;
+  font-size:14px;
+}
+
+
+/* ATLAS Executive Report: YTD MRR and connection trend */
+.executiveRevenueTrendWrap{
+  display:grid;
+  gap:14px;
+}
+
+.executiveRevenueLegend{
+  display:flex;
+  flex-wrap:wrap;
+  gap:18px;
+  align-items:center;
+  color:#60708b;
+  font-size:12px;
+}
+
+.executiveRevenueLegend span{
+  display:inline-flex;
+  gap:7px;
+  align-items:center;
+}
+
+.executiveRevenueLegend i{
+  display:inline-block;
+  width:18px;
+  height:4px;
+  border-radius:3px;
+}
+
+.executiveRevenueLegend .mrrLegend{
+  height:10px;
+  background:#1684c7;
+}
+
+.executiveRevenueLegend .connectionLegend{
+  background:#10a875;
+}
+
+.executiveRevenueLegend .trendLegend{
+  height:0;
+  border-top:2px dashed #315f9f;
+  border-radius:0;
+}
+
+.executiveRevenueTrendChart{
+  min-height:310px;
+  background:#f8fafc;
+  border-bottom:1px solid #e5eaf2;
+}
+
+.executiveRevenueSvg{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+.executiveChartGrid{
+  stroke:#e3e9f2;
+  stroke-width:1;
+}
+
+.executiveChartAxis,
+.executiveChartDate,
+.executiveChartAxisTitle{
+  fill:#60708b;
+  font-size:11px;
+}
+
+.executiveChartAxisTitle{
+  font-weight:700;
+}
+
+.executiveMrrBar{
+  fill:#1684c7;
+  opacity:.88;
+}
+
+.executiveConnectionPath{
+  fill:none;
+  stroke:#10a875;
+  stroke-width:4;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.executiveConnectionDot{
+  fill:#10a875;
+  stroke:#fff;
+  stroke-width:2;
+}
+
+.executiveMrrTrend{
+  fill:none;
+  stroke:#315f9f;
+  stroke-width:3;
+  stroke-dasharray:9 7;
+  stroke-linecap:round;
+}
+
+.executiveRevenueSummary{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  border-top:1px solid #e5eaf2;
+}
+
+.executiveRevenueSummary > div{
+  padding:14px 18px;
+  text-align:center;
+  border-right:1px solid #e5eaf2;
+}
+
+.executiveRevenueSummary > div:last-child{
+  border-right:0;
+}
+
+.executiveRevenueSummary span{
+  display:block;
+  color:#60708b;
+  font-size:12px;
+}
+
+.executiveRevenueSummary strong{
+  display:block;
+  color:#172033;
+  font-size:20px;
+  margin-top:5px;
+}
+
+.executiveRevenueSummary > div:last-child strong{
+  color:#008568;
+}
+
+.executiveRevenueEmpty{
+  display:flex;
+  min-height:300px;
+  align-items:center;
+  justify-content:center;
+  color:#718096;
+  font-size:13px;
+}
+
+@media(max-width:700px){
+  .executiveRevenueSummary{
+    grid-template-columns:1fr;
+  }
+
+  .executiveRevenueSummary > div{
+    border-right:0;
+    border-bottom:1px solid #e5eaf2;
+  }
+
+  .executiveRevenueSummary > div:last-child{
+    border-bottom:0;
+  }
+}
+
+.executiveMilestoneGroup{
+  padding:14px 0;
+  border-bottom:1px solid #e5eaf2;
+}
+
+.executiveMilestoneGroup:last-child{
+  border-bottom:0;
+}
+
+.executiveMilestoneGroupHeader{
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  align-items:center;
+  margin-bottom:8px;
+}
+
+.executiveMilestoneGroupHeader strong{
+  color:#172033;
+  font-size:14px;
+}
+
+.executiveMilestoneGroupHeader span{
+  color:#60708b;
+  font-size:12px;
+  white-space:nowrap;
+}
+
+.executiveMilestoneGroup ul{
+  margin:0;
+  padding-left:18px;
+  color:#52627d;
+}
+
+.executiveMilestoneGroup li{
+  margin:4px 0;
+}
+
+.executiveMilestoneGroup.upcoming{
+  border-left:3px solid #1d9ed1;
+  padding-left:14px;
+}
+
+.executiveMilestoneGroup.risk{
+  border-left:3px solid #ef4444;
+  padding-left:14px;
+}
+
+/* =========================================================
+   ATLAS Executive grouped report layout
+   ========================================================= */
+
+#executiveMilestones,
+#executiveDeliverables,
+#executiveRisks{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  align-content:start;
+  padding-top:4px;
+}
+
+/* Compact group card */
+#executiveMilestones .executiveMilestoneGroup,
+#executiveDeliverables .executiveMilestoneGroup,
+#executiveRisks .executiveMilestoneGroup{
+  min-width:0;
+  margin:0;
+  padding:14px 16px;
+  border:1px solid #dfe6f1;
+  border-radius:10px;
+  background:#fff;
+  break-inside:avoid;
+}
+
+/* Remove the earlier large divider treatment */
+#executiveMilestones .executiveMilestoneGroup,
+#executiveDeliverables .executiveMilestoneGroup,
+#executiveRisks .executiveMilestoneGroup{
+  border-bottom:1px solid #dfe6f1;
+}
+
+#executiveDeliverables .executiveMilestoneGroup.upcoming{
+  border-left:4px solid #169bd5;
+}
+
+#executiveRisks .executiveMilestoneGroup.risk{
+  border-left:4px solid #ef4c4c;
+}
+
+/* Header */
+.executiveMilestoneGroupHeader{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+  margin:0 0 9px;
+}
+
+.executiveMilestoneGroupHeader strong{
+  min-width:0;
+  color:#172033;
+  font-size:14px;
+  line-height:1.3;
+  font-weight:700;
+  overflow-wrap:anywhere;
+}
+
+.executiveMilestoneGroupHeader span{
+  flex:0 0 auto;
+  padding:3px 7px;
+  border-radius:999px;
+  background:#eef3fb;
+  color:#50617d;
+  font-size:11px;
+  line-height:1.2;
+  font-weight:700;
+  white-space:nowrap;
+  text-transform:capitalize;
+}
+
+/* Summary list */
+.executiveMilestoneGroup ul{
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+
+.executiveMilestoneGroup li{
+  position:relative;
+  margin:0;
+  padding:4px 0 4px 14px;
+  color:#52627c;
+  font-size:13px;
+  line-height:1.4;
+  overflow-wrap:anywhere;
+}
+
+.executiveMilestoneGroup li::before{
+  content:"";
+  position:absolute;
+  top:11px;
+  left:1px;
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:#8090a8;
+}
+
+#executiveDeliverables .executiveMilestoneGroup li::before{
+  background:#169bd5;
+}
+
+#executiveRisks .executiveMilestoneGroup li::before{
+  background:#ef4c4c;
+}
+
+/* Keep report cards aligned naturally instead of stretching */
+.executiveReportGrid,
+.executiveReportSecondaryGrid{
+  align-items:start;
+}
+
+.executiveReportCard{
+  min-width:0;
+}
+
+/* Empty-state elements should span the full panel */
+#executiveMilestones > .executiveEmpty,
+#executiveDeliverables > .executiveEmpty,
+#executiveRisks > .executiveEmpty{
+  grid-column:1 / -1;
+}
+
+/* Narrow desktop and tablet */
+@media (max-width:1200px){
+  #executiveMilestones,
+  #executiveDeliverables,
+  #executiveRisks{
+    grid-template-columns:1fr;
+  }
+}
+
+/* Mobile */
+@media (max-width:700px){
+  #executiveMilestones .executiveMilestoneGroup,
+  #executiveDeliverables .executiveMilestoneGroup,
+  #executiveRisks .executiveMilestoneGroup{
+    padding:12px 13px;
+  }
+
+  .executiveMilestoneGroupHeader{
+    display:grid;
+    gap:6px;
+  }
+
+  .executiveMilestoneGroupHeader span{
+    justify-self:start;
+  }
+}
+
+/* Download/print presentation */
+@media print{
+  #executiveMilestones,
+  #executiveDeliverables,
+  #executiveRisks{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:9px;
+  }
+
+  #executiveMilestones .executiveMilestoneGroup,
+  #executiveDeliverables .executiveMilestoneGroup,
+  #executiveRisks .executiveMilestoneGroup{
+    padding:10px 12px;
+    border-radius:7px;
+  }
+
+  .executiveMilestoneGroupHeader strong{
+    font-size:12px;
+  }
+
+  .executiveMilestoneGroupHeader span{
+    font-size:9px;
+  }
+
+  .executiveMilestoneGroup li{
+    padding-top:2px;
+    padding-bottom:2px;
+    font-size:10px;
+    line-height:1.3;
+  }
+}
+
+
+
+/* =========================================================
+   ATLAS Executive Report — dynamic year/quarter pie
+   ========================================================= */
+
+.executiveReportGrid.executiveReportBoardLayout{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  grid-template-areas:
+    "revenue mix"
+    "milestones deliverables"
+    "risks risks";
+  gap:16px;
+  align-items:start;
+}
+
+.executiveGridRevenue{
+  grid-area:revenue;
+}
+
+.executiveGridMix{
+  grid-area:mix;
+}
+
+.executiveGridMilestones{
+  grid-area:milestones;
+}
+
+.executiveGridDeliverables{
+  grid-area:deliverables;
+}
+
+.executiveGridRisks{
+  grid-area:risks;
+}
+
+.executiveMixCard{
+  min-width:0;
+}
+
+.executiveMixBody{
+  display:grid;
+  grid-template-columns:minmax(190px,.75fr) minmax(260px,1.25fr);
+  gap:24px;
+  align-items:center;
+  padding:18px 4px 8px;
+}
+
+.executiveMixPie{
+  position:relative;
+  width:min(230px,100%);
+  aspect-ratio:1;
+  margin:auto;
+  border-radius:50%;
+}
+
+.executiveMixPie::after{
+  content:"";
+  position:absolute;
+  inset:30%;
+  border-radius:50%;
+  background:#fff;
+}
+
+.executiveMixPie > div{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+.executiveMixPie strong{
+  color:#172033;
+  font-size:28px;
+  line-height:1;
+}
+
+.executiveMixPie span{
+  margin-top:4px;
+  color:#60708b;
+  font-size:12px;
+}
+
+.executiveMixLegend{
+  display:grid;
+  gap:4px;
+}
+
+.executiveMixLegendRow{
+  display:grid;
+  grid-template-columns:10px minmax(0,1fr) auto 38px;
+  gap:9px;
+  align-items:center;
+  padding:8px 0;
+  border-bottom:1px solid #e5eaf2;
+}
+
+.executiveMixLegendRow:last-child{
+  border-bottom:0;
+}
+
+.executiveMixDot{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+}
+
+.executiveMixLegendRow div{
+  min-width:0;
+}
+
+.executiveMixLegendRow strong{
+  display:block;
+  color:#172033;
+  font-size:13px;
+}
+
+.executiveMixLegendRow small{
+  display:block;
+  margin-top:2px;
+  color:#60708b;
+  font-size:10px;
+}
+
+.executiveMixLegendRow b{
+  color:#172033;
+  font-size:13px;
+}
+
+.executiveMixLegendRow em{
+  color:#315f9f;
+  font-size:12px;
+  font-style:normal;
+  font-weight:700;
+  text-align:right;
+}
+
+/* Full-width risks can use multiple summary columns. */
+.executiveGridRisks #executiveRisks{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+
+/* Keep the paired update cards balanced. */
+.executiveGridMilestones,
+.executiveGridDeliverables{
+  width:100%;
+  min-width:0;
+}
+
+@media(max-width:1200px){
+  .executiveMixBody{
+    grid-template-columns:1fr;
+  }
+
+  .executiveMixPie{
+    width:190px;
+  }
+
+  .executiveGridRisks #executiveRisks{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+@media(max-width:900px){
+  .executiveReportGrid.executiveReportBoardLayout{
+    grid-template-columns:1fr;
+    grid-template-areas:
+      "revenue"
+      "mix"
+      "milestones"
+      "deliverables"
+      "risks";
+  }
+
+  .executiveGridRisks #executiveRisks{
+    grid-template-columns:1fr;
+  }
+}
+
+@media print{
+  .executiveReportGrid.executiveReportBoardLayout{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    grid-template-areas:
+      "revenue mix"
+      "milestones deliverables"
+      "risks risks";
+    gap:10px;
+  }
+
+  .executiveMixBody{
+    grid-template-columns:170px 1fr;
+    gap:12px;
+  }
+
+  .executiveMixPie{
+    width:155px;
+  }
+}
+
+/* =========================================================
+   Executive Report — equal-height top chart cards
+   ========================================================= */
+
+.executiveReportGrid.executiveReportBoardLayout{
+  align-items:stretch;
+}
+
+.executiveGridRevenue,
+.executiveGridMix{
+  height:100%;
+  min-height:0;
+}
+
+/* Fill the complete right-side panel */
+.executiveGridMix{
+  display:flex;
+  flex-direction:column;
+}
+
+.executiveGridMix .executiveCardHead{
+  flex:0 0 auto;
+}
+
+/* Use all remaining vertical space below the heading */
+.executiveGridMix .executiveMixBody{
+  flex:1 1 auto;
+  display:grid;
+  grid-template-columns:minmax(260px,.9fr) minmax(320px,1.1fr);
+  gap:34px;
+  align-items:center;
+  min-height:390px;
+  padding:28px 24px 30px;
+}
+
+/* Increase the chart so it visually matches the revenue chart */
+.executiveGridMix .executiveMixPie{
+  width:min(300px,100%);
+  max-width:300px;
+  align-self:center;
+  justify-self:center;
+}
+
+.executiveGridMix .executiveMixPie strong{
+  font-size:34px;
+}
+
+.executiveGridMix .executiveMixPie span{
+  font-size:13px;
+}
+
+/* Spread the legend evenly through the available height */
+.executiveGridMix .executiveMixLegend{
+  display:grid;
+  align-content:center;
+  gap:0;
+  height:100%;
+}
+
+.executiveGridMix .executiveMixLegendRow{
+  min-height:58px;
+  padding:11px 0;
+}
+
+.executiveGridMix .executiveMixLegendRow strong{
+  font-size:14px;
+}
+
+.executiveGridMix .executiveMixLegendRow small{
+  font-size:11px;
+}
+
+.executiveGridMix .executiveMixLegendRow b,
+.executiveGridMix .executiveMixLegendRow em{
+  font-size:14px;
+}
+
+/* Keep both top-row cards equal even when content changes */
+.executiveReportBoardLayout > .executiveGridRevenue,
+.executiveReportBoardLayout > .executiveGridMix{
+  align-self:stretch;
+}
+
+/* Responsive layout */
+@media(max-width:1200px){
+  .executiveGridMix .executiveMixBody{
+    grid-template-columns:minmax(220px,.8fr) minmax(260px,1.2fr);
+    gap:22px;
+    min-height:350px;
+    padding:22px 18px 24px;
+  }
+
+  .executiveGridMix .executiveMixPie{
+    width:min(240px,100%);
+  }
+}
+
+@media(max-width:900px){
+  .executiveGridMix .executiveMixBody{
+    grid-template-columns:1fr;
+    min-height:auto;
+  }
+
+  .executiveGridMix .executiveMixPie{
+    width:220px;
+  }
+}
+
+/* Maintain equal sizing in exported PDF */
+@media print{
+  .executiveGridRevenue,
+  .executiveGridMix{
+    height:100%;
+  }
+
+  .executiveGridMix .executiveMixBody{
+    grid-template-columns:180px 1fr;
+    min-height:310px;
+    gap:15px;
+    padding:14px;
+  }
+
+  .executiveGridMix .executiveMixPie{
+    width:170px;
+  }
+
+  .executiveGridMix .executiveMixLegendRow{
+    min-height:42px;
+    padding:6px 0;
+  }
+}
+
+
+/* =========================================================
+   Executive Report - remove KPI summary tiles
+   ========================================================= */
+
+#executiveReport .executiveMetrics,
+#executiveReportView .executiveMetrics,
+#executiveReport .executiveMetricGrid,
+#executiveReportView .executiveMetricGrid,
+#executiveReport .executiveStats,
+#executiveReportView .executiveStats{
+    display:none !important;
+}
+
+
+/* Hide Executive Report KPI summary row */
+#executiveKpis{
+  display:none !important;
+}
+
+
+/* =========================================================
+   Executive Report PDF — fit entire report on one page
+   ========================================================= */
+
+@page{
+  size: landscape;
+  margin: 0.22in;
+}
+
+@media print{
+  html,
+  body{
+    width:100%;
+    margin:0 !important;
+    padding:0 !important;
+    background:#fff !important;
+    overflow:visible !important;
+  }
+
+  /* Hide application chrome and report controls */
+  .sidebar,
+  .topbar,
+  .appHeader,
+  .pageHeader,
+  .reportTabs,
+  .executiveControlPanel,
+  #executiveReportControls,
+  #executiveReportGenerated,
+  #printExecutiveReport,
+  #executiveReportPdf,
+  button,
+  nav{
+    display:none !important;
+  }
+
+  /* Show only the Executive Report */
+  body *{
+    visibility:hidden;
+  }
+
+  #executiveReport,
+  #executiveReportView,
+  #executiveReport *,
+  #executiveReportView *{
+    visibility:visible;
+  }
+
+  #executiveReport,
+  #executiveReportView{
+    position:absolute !important;
+    inset:0 !important;
+    width:100% !important;
+    max-width:none !important;
+    margin:0 !important;
+    padding:0 !important;
+    background:#fff !important;
+  }
+
+  /* Scale the full report to one landscape page */
+  #executiveReportView{
+    transform:scale(.68);
+    transform-origin:top left;
+    width:147.06% !important;
+  }
+
+  /* Tighten overall spacing */
+  .executiveSummary,
+  .executiveSummaryCard{
+    margin-bottom:8px !important;
+    padding:12px 16px !important;
+  }
+
+  .executiveReportGrid.executiveReportBoardLayout{
+    gap:8px !important;
+  }
+
+  .executiveBoardCard,
+  .executiveReportCard,
+  .executiveGridRevenue,
+  .executiveGridMix,
+  .executiveGridMilestones,
+  .executiveGridDeliverables,
+  .executiveGridRisks{
+    margin:0 !important;
+    padding:10px 12px !important;
+    break-inside:avoid !important;
+    page-break-inside:avoid !important;
+  }
+
+  /* Keep layout in the requested board format */
+  .executiveReportGrid.executiveReportBoardLayout{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    grid-template-areas:
+      "revenue mix"
+      "milestones deliverables"
+      "risks risks" !important;
+  }
+
+  /* Compact the charts */
+  .executiveRevenueTrendChart{
+    min-height:220px !important;
+  }
+
+  .executiveRevenueSvg{
+    max-height:230px !important;
+  }
+
+  .executiveMixBody{
+    grid-template-columns:150px 1fr !important;
+    min-height:220px !important;
+    gap:10px !important;
+    padding:8px !important;
+  }
+
+  .executiveMixPie{
+    width:145px !important;
+  }
+
+  /* Compact milestone, deliverable, and risk cards */
+  #executiveMilestones,
+  #executiveDeliverables{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:6px !important;
+  }
+
+  #executiveRisks{
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    gap:6px !important;
+  }
+
+  .executiveMilestoneGroup{
+    padding:7px 9px !important;
+    border-radius:6px !important;
+  }
+
+  .executiveMilestoneGroupHeader{
+    margin-bottom:4px !important;
+  }
+
+  .executiveMilestoneGroupHeader strong{
+    font-size:9px !important;
+    line-height:1.15 !important;
+  }
+
+  .executiveMilestoneGroupHeader span{
+    font-size:7px !important;
+    padding:2px 5px !important;
+  }
+
+  .executiveMilestoneGroup li{
+    font-size:7px !important;
+    line-height:1.2 !important;
+    padding-top:1px !important;
+    padding-bottom:1px !important;
+  }
+
+  /* Compact report typography */
+  #executiveReportView h1{
+    font-size:18px !important;
+    margin:0 0 3px !important;
+  }
+
+  #executiveReportView h2{
+    font-size:12px !important;
+    margin:0 !important;
+  }
+
+  #executiveReportView h3{
+    font-size:10px !important;
+  }
+
+  #executiveReportView p,
+  #executiveReportView span,
+  #executiveReportView small{
+    line-height:1.2 !important;
+  }
+
+  /* Preserve colors in PDF */
+  *{
+    -webkit-print-color-adjust:exact !important;
+    print-color-adjust:exact !important;
+  }
+}
+
+/* =========================================================
+   ATLAS Executive Report PDF
+   Portrait, single-page override
+   ========================================================= */
+
+@page{
+  size: Letter portrait;
+  margin:0.18in;
+}
+
+@media print{
+
+  html,
+  body{
+    width:100% !important;
+    height:auto !important;
+    margin:0 !important;
+    padding:0 !important;
+    overflow:visible !important;
+    background:#fff !important;
+  }
+
+  /* Hide all application controls and navigation */
+  .sidebar,
+  .topbar,
+  .appHeader,
+  .pageHeader,
+  .reportTabs,
+  .executiveControlPanel,
+  #executiveReportControls,
+  #executiveReportGenerated,
+  #printExecutiveReport,
+  #executiveReportPdf,
+  nav,
+  button{
+    display:none !important;
+  }
+
+  /* Only print the Executive Report */
+  body > *{
+    display:none !important;
+  }
+
+  #executiveReportView,
+  #executiveReport{
+    display:block !important;
+  }
+
+  #executiveReportView *,
+  #executiveReport *{
+    visibility:visible !important;
+  }
+
+  #executiveReportView{
+    position:static !important;
+    width:200% !important;
+    max-width:none !important;
+    margin:0 !important;
+    padding:0 !important;
+
+    /*
+      Chrome's zoom changes layout dimensions, unlike transform.
+      This allows the complete report to paginate as one page.
+    */
+    zoom:0.50 !important;
+    transform:none !important;
+  }
+
+  #executiveReport{
+    position:static !important;
+    width:100% !important;
+    max-width:none !important;
+    margin:0 !important;
+    padding:0 !important;
+  }
+
+  /* Hide the on-screen report heading controls but keep report title */
+  .executiveReportHeader{
+    margin:0 0 8px !important;
+    padding:0 !important;
+  }
+
+  .executiveReportHeader h1{
+    font-size:24px !important;
+    margin:0 0 2px !important;
+  }
+
+  .executiveReportHeader p{
+    margin:0 !important;
+  }
+
+  /* Compact executive summary */
+  .executiveSummary,
+  .executiveSummaryCard{
+    margin:0 0 8px !important;
+    padding:12px 16px !important;
+    border-radius:10px !important;
+    break-inside:avoid !important;
+  }
+
+  .executiveSummary h2,
+  .executiveSummaryCard h2{
+    font-size:16px !important;
+    margin:0 0 5px !important;
+  }
+
+  .executiveSummary p,
+  .executiveSummaryCard p{
+    font-size:11px !important;
+    line-height:1.35 !important;
+    margin:0 !important;
+  }
+
+  /* Preserve requested report arrangement */
+  .executiveReportGrid.executiveReportBoardLayout{
+    display:grid !important;
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    grid-template-areas:
+      "revenue mix"
+      "milestones deliverables"
+      "risks risks" !important;
+    gap:8px !important;
+    align-items:start !important;
+  }
+
+  .executiveGridRevenue{
+    grid-area:revenue !important;
+  }
+
+  .executiveGridMix{
+    grid-area:mix !important;
+  }
+
+  .executiveGridMilestones{
+    grid-area:milestones !important;
+  }
+
+  .executiveGridDeliverables{
+    grid-area:deliverables !important;
+  }
+
+  .executiveGridRisks{
+    grid-area:risks !important;
+  }
+
+  /* General report cards */
+  .executiveBoardCard,
+  .executiveReportCard,
+  .executiveGridRevenue,
+  .executiveGridMix,
+  .executiveGridMilestones,
+  .executiveGridDeliverables,
+  .executiveGridRisks{
+    min-width:0 !important;
+    height:auto !important;
+    margin:0 !important;
+    padding:10px 12px !important;
+    border-radius:8px !important;
+    break-inside:avoid !important;
+    page-break-inside:avoid !important;
+  }
+
+  /* Compact revenue chart */
+  .executiveRevenueTrendChart{
+    min-height:0 !important;
+    height:235px !important;
+  }
+
+  .executiveRevenueSvg{
+    display:block !important;
+    width:100% !important;
+    height:225px !important;
+    max-height:225px !important;
+  }
+
+  .executiveRevenueLegend{
+    margin-bottom:3px !important;
+    gap:10px !important;
+    font-size:9px !important;
+  }
+
+  .executiveRevenueSummary{
+    margin-top:4px !important;
+  }
+
+  .executiveRevenueSummary > div{
+    padding:7px 8px !important;
+  }
+
+  .executiveRevenueSummary span{
+    font-size:9px !important;
+  }
+
+  .executiveRevenueSummary strong{
+    font-size:15px !important;
+    margin-top:2px !important;
+  }
+
+  /* Compact Year / Quarter Mix */
+  .executiveGridMix .executiveMixBody{
+    display:grid !important;
+    grid-template-columns:155px minmax(0,1fr) !important;
+    gap:10px !important;
+    min-height:235px !important;
+    padding:8px !important;
+    align-items:center !important;
+  }
+
+  .executiveGridMix .executiveMixPie{
+    width:145px !important;
+    max-width:145px !important;
+  }
+
+  .executiveMixPie strong{
+    font-size:22px !important;
+  }
+
+  .executiveMixPie span{
+    font-size:9px !important;
+  }
+
+  .executiveMixLegendRow{
+    min-height:0 !important;
+    padding:4px 0 !important;
+    gap:6px !important;
+  }
+
+  .executiveMixLegendRow strong,
+  .executiveMixLegendRow b,
+  .executiveMixLegendRow em{
+    font-size:9px !important;
+  }
+
+  .executiveMixLegendRow small{
+    font-size:7px !important;
+  }
+
+  /* Compact grouped report content */
+  #executiveMilestones,
+  #executiveDeliverables{
+    display:grid !important;
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:5px !important;
+  }
+
+  #executiveRisks{
+    display:grid !important;
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    gap:5px !important;
+  }
+
+  .executiveMilestoneGroup{
+    min-width:0 !important;
+    margin:0 !important;
+    padding:6px 7px !important;
+    border-radius:5px !important;
+    break-inside:avoid !important;
+  }
+
+  .executiveMilestoneGroupHeader{
+    gap:5px !important;
+    margin:0 0 3px !important;
+  }
+
+  .executiveMilestoneGroupHeader strong{
+    font-size:8px !important;
+    line-height:1.15 !important;
+  }
+
+  .executiveMilestoneGroupHeader span{
+    padding:1px 4px !important;
+    font-size:6px !important;
+  }
+
+  .executiveMilestoneGroup ul{
+    margin:0 !important;
+    padding:0 !important;
+  }
+
+  .executiveMilestoneGroup li{
+    margin:0 !important;
+    padding:1px 0 1px 9px !important;
+    font-size:6.5px !important;
+    line-height:1.2 !important;
+  }
+
+  .executiveMilestoneGroup li::before{
+    top:5px !important;
+    width:3px !important;
+    height:3px !important;
+  }
+
+  /* Card headings */
+  #executiveReportView h2,
+  #executiveReport h2{
+    font-size:14px !important;
+    line-height:1.15 !important;
+    margin:0 !important;
+  }
+
+  .executiveSectionLabel{
+    font-size:7px !important;
+    margin-bottom:2px !important;
+  }
+
+  .executiveCardHead{
+    margin-bottom:5px !important;
+  }
+
+  .executiveCardPeriod{
+    font-size:8px !important;
+  }
+
+  /* Avoid accidental page breaks */
+  #executiveReportView,
+  #executiveReportView > *,
+  .executiveReportGrid,
+  .executiveReportBoardLayout{
+    page-break-before:avoid !important;
+    page-break-after:avoid !important;
+  }
+
+  /* Preserve colors and charts */
+  *{
+    -webkit-print-color-adjust:exact !important;
+    print-color-adjust:exact !important;
+  }
+}
+
+
+
+/* =========================================================
+   Executive Report card copy/download actions
+   ========================================================= */
+
+.executiveCardExportable{
+  position:relative;
+}
+
+.executiveCardActions{
+  position:absolute;
+  top:12px;
+  right:12px;
+  z-index:8;
+  display:flex;
+  gap:6px;
+  opacity:0;
+  transform:translateY(-2px);
+  transition:opacity .16s ease,transform .16s ease;
+}
+
+.executiveCardExportable:hover > .executiveCardActions,
+.executiveCardExportable:focus-within > .executiveCardActions{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.executiveCardAction{
+  display:grid;
+  place-items:center;
+  width:32px;
+  height:32px;
+  margin:0;
+  padding:0;
+  border:1px solid #d7dfec;
+  border-radius:8px;
+  background:rgba(255,255,255,.96);
+  color:#38527f;
+  cursor:pointer;
+  box-shadow:0 2px 7px rgba(23,32,51,.10);
+}
+
+.executiveSummary .executiveCardAction,
+.executiveSummaryCard .executiveCardAction{
+  border-color:rgba(255,255,255,.25);
+  background:rgba(255,255,255,.12);
+  color:#fff;
+}
+
+.executiveCardAction:hover{
+  background:#edf3ff;
+  color:#173d91;
+}
+
+.executiveSummary .executiveCardAction:hover,
+.executiveSummaryCard .executiveCardAction:hover{
+  background:rgba(255,255,255,.22);
+}
+
+.executiveCardAction.success{
+  border-color:#10a875;
+  background:#e6f8f2;
+  color:#087a59;
+}
+
+.executiveCardAction svg{
+  width:17px;
+  height:17px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+@media(max-width:900px){
+  .executiveCardActions{
+    opacity:1;
+    transform:none;
+  }
+}
+
+@media print{
+  .executiveCardActions{
+    display:none !important;
+  }
+}
+
+/* =========================================================
+   ATLAS Executive Report PDF — blank-page correction
+   ========================================================= */
+
+@media print{
+
+  /*
+    Undo the earlier rule that removed the Executive Report's
+    parent application container from the print document.
+  */
+  body > *{
+    display:block !important;
+  }
+
+  body *{
+    visibility:hidden !important;
+  }
+
+  /* Keep the report and all of its contents visible. */
+  #executiveReport,
+  #executiveReportView,
+  #executiveReport *,
+  #executiveReportView *{
+    visibility:visible !important;
+  }
+
+  /* Explicitly hide application chrome. */
+  .sidebar,
+  .topbar,
+  .appHeader,
+  .pageHeader,
+  .reportTabs,
+  .executiveControlPanel,
+  #executiveReportControls,
+  #executiveReportGenerated,
+  #printExecutiveReport,
+  #executiveReportPdf,
+  .executiveCardActions,
+  nav,
+  button{
+    display:none !important;
+  }
+
+  /*
+    Position the report at the top-left of the printable page.
+    Chrome zoom reduces both its visual and pagination size.
+  */
+  #executiveReportView,
+  #executiveReport{
+    display:block !important;
+    position:absolute !important;
+    top:0 !important;
+    left:0 !important;
+    margin:0 !important;
+    padding:0 !important;
+    max-width:none !important;
+    transform:none !important;
+  }
+
+  #executiveReportView{
+    width:200% !important;
+    zoom:.50 !important;
+  }
+
+  #executiveReport{
+    width:100% !important;
+  }
+
+  *{
+    -webkit-print-color-adjust:exact !important;
+    print-color-adjust:exact !important;
+  }
+}
+
+
+/* =========================================================
+   ATLAS Executive Report — deterministic one-page printing
+   ========================================================= */
+
+#atlasExecutivePrintPage{
+  display:none;
+}
+
+@page{
+  size:Letter portrait;
+  margin:0.16in;
+}
+
+@media print{
+
+  html,
+  body{
+    width:auto !important;
+    height:auto !important;
+    min-height:0 !important;
+    margin:0 !important;
+    padding:0 !important;
+    overflow:visible !important;
+    background:#fff !important;
+  }
+
+  /*
+    Hide the live application without removing the dedicated
+    print clone from the rendering tree.
+  */
+  body > *:not(#atlasExecutivePrintPage){
+    display:none !important;
+  }
+
+  #atlasExecutivePrintPage{
+    display:block !important;
+    position:absolute !important;
+    top:0 !important;
+    left:0 !important;
+    width:8.18in !important;
+    height:10.68in !important;
+    margin:0 !important;
+    padding:0 !important;
+    overflow:hidden !important;
+    background:#fff !important;
+  }
+
+  .atlasExecutivePrintStage{
+    position:absolute !important;
+    top:0 !important;
+    left:0 !important;
+    margin:0 !important;
+    padding:0 !important;
+  }
+
+  #atlasExecutivePrintClone{
+    display:block !important;
+    position:static !important;
+    margin:0 !important;
+    padding:0 !important;
+    max-width:none !important;
+    overflow:visible !important;
+    background:#fff !important;
+  }
+
+  #atlasExecutivePrintClone,
+  #atlasExecutivePrintClone *{
+    visibility:visible !important;
+    box-sizing:border-box !important;
+    -webkit-print-color-adjust:exact !important;
+    print-color-adjust:exact !important;
+  }
+
+  #atlasExecutivePrintClone .executiveCardActions,
+  #atlasExecutivePrintClone button,
+  #atlasExecutivePrintClone nav,
+  #atlasExecutivePrintClone .executiveControlPanel{
+    display:none !important;
+  }
+
+  /*
+    Prevent internal cards from forcing additional pages.
+  */
+  #atlasExecutivePrintClone *,
+  #atlasExecutivePrintClone .executiveBoardCard,
+  #atlasExecutivePrintClone .executiveReportCard,
+  #atlasExecutivePrintClone .executiveMilestoneGroup{
+    break-before:avoid !important;
+    break-after:avoid !important;
+    break-inside:avoid !important;
+    page-break-before:avoid !important;
+    page-break-after:avoid !important;
+    page-break-inside:avoid !important;
+  }
+}
+
+/* =========================================================
+   ATLAS sidebar report/support navigation
+   ========================================================= */
+
+.sidebarSection{
+  display:grid;
+  gap:4px;
+  margin-top:18px;
+}
+
+.sidebarSectionLabel{
+  padding:0 10px 6px;
+  color:#7fb5ff;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+.sidebarSection a{
+  width:100%;
+}
+
+.sidebarReportsSection{
+  margin-top:22px;
+}
+
+.sidebarSupportSection{
+  margin-top:22px;
+}
+
+
+/* ATLAS sidebar report and support groups */
+#appSidebar .navGroup{
+  display:grid;
+  gap:4px;
+  margin-top:20px;
+}
+
+#appSidebar .navLabel{
+  padding:0 10px 7px;
+  color:#83baff;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+#appSidebar .navGroup .navChild{
+  width:100%;
+}
+
+
+/* Report-specific sidebar selection */
+#appSidebar [data-report-mode]{
+  background:transparent;
+}
+
+#appSidebar [data-report-mode].reportActive{
+  background:#29479f;
+  color:#fff;
+}
+
+#appSidebar [data-report-mode]:not(.reportActive):hover{
+  background:rgba(71,111,207,.22);
+}
+
+/* Report menu: only the selected report is highlighted */
+#appSidebar [data-report-mode],
+#appSidebar [data-report-mode].active{
+  background:transparent !important;
+  color:inherit;
+  box-shadow:none !important;
+}
+
+#appSidebar [data-report-mode].reportActive,
+#appSidebar [data-report-mode].active.reportActive{
+  background:#29479f !important;
+  color:#ffffff !important;
+  box-shadow:0 10px 24px rgba(24,58,145,.28) !important;
+}
+
+#appSidebar [data-report-mode]:not(.reportActive):hover{
+  background:rgba(71,111,207,.22) !important;
+}
+
+/* Keep report menu text colors consistent */
+#appSidebar [data-report-mode],
+#appSidebar [data-report-mode].active{
+  color:#c5cede !important;
+}
+
+#appSidebar [data-report-mode].reportActive,
+#appSidebar [data-report-mode].active.reportActive{
+  color:#ffffff !important;
+}
+
+#appSidebar [data-report-mode]:not(.reportActive):hover{
+  color:#ffffff !important;
+}
+
+/* Ensure Executive Report action buttons receive clicks */
+.executiveCardActions{
+  pointer-events:auto !important;
+}
+
+.executiveCardAction{
+  pointer-events:auto !important;
+  position:relative;
+  z-index:20;
+}
+
+.executiveCardAction svg,
+.executiveCardAction path,
+.executiveCardAction rect{
+  pointer-events:none;
+}
+
+
+
+/* =========================================================
+   Dashboard PNG card controls
+   ========================================================= */
+
+.dashboardPngExportable{
+  position:relative;
+}
+
+.dashboardPngExportable > .dashboardCardActions{
+  top:10px;
+  right:10px;
+}
+
+.dashboardPngExportable:hover > .dashboardCardActions,
+.dashboardPngExportable:focus-within > .dashboardCardActions{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/*
+ * Ensure the controls stay above charts and card content.
+ */
+.dashboardCardActions{
+  z-index:40;
+  pointer-events:auto;
+}
+
+.dashboardCardActions .executiveCardAction{
+  pointer-events:auto;
+}
+
+@media(max-width:900px){
+  .dashboardPngExportable > .dashboardCardActions{
+    opacity:1;
+    transform:none;
+  }
+}
+
+@media print{
+  .dashboardCardActions{
+    display:none !important;
+  }
+}
+
+
+/* Dashboard PNG controls — actual Dashboard panels */
+#dashboardView section.panel.dashboardPngExportable{
+  position:relative !important;
+}
+
+#dashboardView section.panel.dashboardPngExportable
+  > .dashboardCardActions{
+  position:absolute !important;
+  top:12px !important;
+  right:12px !important;
+  z-index:100 !important;
+  display:flex !important;
+  gap:6px !important;
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(-2px);
+  transition:
+    opacity .15s ease,
+    visibility .15s ease,
+    transform .15s ease;
+}
+
+#dashboardView section.panel.dashboardPngExportable:hover
+  > .dashboardCardActions,
+#dashboardView section.panel.dashboardPngExportable:focus-within
+  > .dashboardCardActions{
+  opacity:1 !important;
+  visibility:visible !important;
+  transform:translateY(0) !important;
+}
+
+#dashboardView .dashboardCardActions .executiveCardAction{
+  display:grid !important;
+  place-items:center !important;
+  width:34px !important;
+  height:34px !important;
+  padding:0 !important;
+  border:1px solid #d7dfec !important;
+  border-radius:8px !important;
+  background:#ffffff !important;
+  color:#38527f !important;
+  box-shadow:0 3px 10px rgba(23,32,51,.14) !important;
+  cursor:pointer !important;
+}
+
+#dashboardView .dashboardCardActions .executiveCardAction:hover{
+  background:#edf3ff !important;
+  color:#173d91 !important;
+}
+
+#dashboardView .dashboardCardActions svg{
+  width:17px !important;
+  height:17px !important;
+  fill:none !important;
+  stroke:currentColor !important;
+  stroke-width:1.8 !important;
+}
+
+@media(max-width:900px){
+  #dashboardView section.panel.dashboardPngExportable
+    > .dashboardCardActions{
+    opacity:1 !important;
+    visibility:visible !important;
+    transform:none !important;
+  }
+}
+
+
+/* =========================================================
+   Dashboard PNG export — top-level panels only
+   ========================================================= */
+
+/*
+ * Exportability must not alter the panel's grid or flex layout.
+ */
+.dashboardPngExportable{
+  position:relative !important;
+  display:inherit;
+  min-width:0;
+}
+
+/*
+ * Toolbar is removed from normal document flow.
+ */
+.dashboardPngExportable > .dashboardCardActions{
+  position:absolute !important;
+  top:12px !important;
+  right:12px !important;
+  z-index:200 !important;
+
+  display:flex !important;
+  gap:6px !important;
+
+  width:auto !important;
+  height:auto !important;
+  margin:0 !important;
+  padding:0 !important;
+
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(-2px);
+
+  pointer-events:auto !important;
+
+  transition:
+    opacity .15s ease,
+    visibility .15s ease,
+    transform .15s ease;
+}
+
+.dashboardPngExportable:hover > .dashboardCardActions,
+.dashboardPngExportable:focus-within > .dashboardCardActions{
+  opacity:1 !important;
+  visibility:visible !important;
+  transform:translateY(0) !important;
+}
+
+/*
+ * Never allow toolbars inside quarterly chart columns.
+ */
+.quarterCard > .dashboardCardActions,
+.quarter-card > .dashboardCardActions,
+.quarterColumn > .dashboardCardActions,
+.quarter-column > .dashboardCardActions,
+.mixQuarter > .dashboardCardActions,
+.mix-quarter > .dashboardCardActions{
+  display:none !important;
+}
+
+/*
+ * Ensure adding the parent export class does not change the
+ * Initiative Mix quarter grid.
+ */
+.dashboardPngExportable .quarterGrid,
+.dashboardPngExportable .quarter-grid,
+.dashboardPngExportable .initiativeMixGrid,
+.dashboardPngExportable .initiative-mix-grid{
+  display:grid;
+  width:100%;
+}
+
+/*
+ * Action button appearance.
+ */
+.dashboardCardActions .executiveCardAction{
+  display:grid !important;
+  place-items:center !important;
+
+  width:34px !important;
+  height:34px !important;
+  min-width:34px !important;
+  min-height:34px !important;
+
+  margin:0 !important;
+  padding:0 !important;
+
+  border:1px solid #d7dfec !important;
+  border-radius:8px !important;
+
+  background:#ffffff !important;
+  color:#38527f !important;
+
+  box-shadow:0 3px 10px rgba(23,32,51,.14) !important;
+  cursor:pointer !important;
+}
+
+.dashboardCardActions .executiveCardAction:hover{
+  background:#edf3ff !important;
+  color:#173d91 !important;
+}
+
+.dashboardCardActions .executiveCardAction svg{
+  width:17px !important;
+  height:17px !important;
+
+  fill:none !important;
+  stroke:currentColor !important;
+  stroke-width:1.8 !important;
+
+  pointer-events:none !important;
+}
+
+@media(max-width:900px){
+  .dashboardPngExportable > .dashboardCardActions{
+    opacity:1 !important;
+    visibility:visible !important;
+    transform:none !important;
+  }
+}
+
+@media print{
+  .dashboardCardActions{
+    display:none !important;
+  }
+}
+
+/* =========================================================
+   Initiative Mix header and PNG actions
+   ========================================================= */
+
+.initiativeMixPngExportable{
+  position:relative !important;
+}
+
+/*
+ * Three-column header:
+ * title | centered fiscal year | PNG actions
+ */
+.initiativeMixExportHeader{
+  display:grid !important;
+  grid-template-columns:
+    minmax(280px,1fr)
+    auto
+    minmax(90px,1fr) !important;
+  grid-template-rows:auto !important;
+  align-items:center !important;
+  gap:18px !important;
+  position:relative !important;
+}
+
+/*
+ * Keep the title and description together on the left.
+ */
+.initiativeMixExportHeader
+  > :not(.initiativeMixYearControl):not(.initiativeMixCardActions){
+  grid-column:1 !important;
+  min-width:0;
+}
+
+/*
+ * Center the Fiscal Year selector in the panel header.
+ */
+.initiativeMixYearControl{
+  grid-column:2 !important;
+  grid-row:1 / span 2 !important;
+  align-self:center !important;
+  justify-self:center !important;
+  position:static !important;
+  margin:0 !important;
+  transform:none !important;
+}
+
+/*
+ * Keep the copy/download controls in normal header flow,
+ * rather than absolutely positioning them over the selector.
+ */
+.initiativeMixCardActions{
+  grid-column:3 !important;
+  grid-row:1 / span 2 !important;
+  align-self:center !important;
+  justify-self:end !important;
+
+  position:static !important;
+  inset:auto !important;
+
+  display:flex !important;
+  gap:7px !important;
+
+  width:auto !important;
+  height:auto !important;
+  margin:0 !important;
+  padding:0 !important;
+
+  opacity:1 !important;
+  visibility:visible !important;
+  transform:none !important;
+
+  pointer-events:auto !important;
+  z-index:20 !important;
+}
+
+.initiativeMixCardActions .executiveCardAction{
+  display:grid !important;
+  place-items:center !important;
+
+  width:34px !important;
+  height:34px !important;
+  min-width:34px !important;
+  min-height:34px !important;
+
+  margin:0 !important;
+  padding:0 !important;
+
+  border:1px solid #d7dfec !important;
+  border-radius:8px !important;
+
+  background:#ffffff !important;
+  color:#38527f !important;
+
+  box-shadow:0 3px 10px rgba(23,32,51,.14) !important;
+  cursor:pointer !important;
+}
+
+.initiativeMixCardActions .executiveCardAction:hover{
+  background:#edf3ff !important;
+  color:#173d91 !important;
+}
+
+.initiativeMixCardActions svg{
+  width:17px !important;
+  height:17px !important;
+
+  fill:none !important;
+  stroke:currentColor !important;
+  stroke-width:1.8 !important;
+  stroke-linecap:round !important;
+  stroke-linejoin:round !important;
+
+  pointer-events:none !important;
+}
+
+/*
+ * PNG capture excludes the toolbar through the existing
+ * html-to-image filter, while preserving the full panel.
+ */
+[data-atlas-png-staging]
+  .initiativeMixCardActions{
+  display:none !important;
+}
+
+@media(max-width:900px){
+  .initiativeMixExportHeader{
+    grid-template-columns:1fr auto !important;
+  }
+
+  .initiativeMixYearControl{
+    grid-column:1 !important;
+    grid-row:2 !important;
+    justify-self:start !important;
+  }
+
+  .initiativeMixCardActions{
+    grid-column:2 !important;
+    grid-row:1 / span 2 !important;
+  }
+}
+
+@media print{
+  .initiativeMixCardActions{
+    display:none !important;
+  }
+}
+
+
+/* =========================================================
+   Initiative Mix header and PNG actions
+   ========================================================= */
+
+.initiativeMixPngExportable{
+  position:relative !important;
+}
+
+/*
+ * Three-column header:
+ * title | centered fiscal year | PNG actions
+ */
+.initiativeMixExportHeader{
+  display:grid !important;
+  grid-template-columns:
+    minmax(280px,1fr)
+    auto
+    minmax(90px,1fr) !important;
+  grid-template-rows:auto !important;
+  align-items:center !important;
+  gap:18px !important;
+  position:relative !important;
+}
+
+/*
+ * Keep the title and description together on the left.
+ */
+.initiativeMixExportHeader
+  > :not(.initiativeMixYearControl):not(.initiativeMixCardActions){
+  grid-column:1 !important;
+  min-width:0;
+}
+
+/*
+ * Center the Fiscal Year selector in the panel header.
+ */
+.initiativeMixYearControl{
+  grid-column:2 !important;
+  grid-row:1 / span 2 !important;
+  align-self:center !important;
+  justify-self:center !important;
+  position:static !important;
+  margin:0 !important;
+  transform:none !important;
+}
+
+/*
+ * Keep the copy/download controls in normal header flow,
+ * rather than absolutely positioning them over the selector.
+ */
+.initiativeMixCardActions{
+  grid-column:3 !important;
+  grid-row:1 / span 2 !important;
+  align-self:center !important;
+  justify-self:end !important;
+
+  position:static !important;
+  inset:auto !important;
+
+  display:flex !important;
+  gap:7px !important;
+
+  width:auto !important;
+  height:auto !important;
+  margin:0 !important;
+  padding:0 !important;
+
+  opacity:1 !important;
+  visibility:visible !important;
+  transform:none !important;
+
+  pointer-events:auto !important;
+  z-index:20 !important;
+}
+
+.initiativeMixCardActions .executiveCardAction{
+  display:grid !important;
+  place-items:center !important;
+
+  width:34px !important;
+  height:34px !important;
+  min-width:34px !important;
+  min-height:34px !important;
+
+  margin:0 !important;
+  padding:0 !important;
+
+  border:1px solid #d7dfec !important;
+  border-radius:8px !important;
+
+  background:#ffffff !important;
+  color:#38527f !important;
+
+  box-shadow:0 3px 10px rgba(23,32,51,.14) !important;
+  cursor:pointer !important;
+}
+
+.initiativeMixCardActions .executiveCardAction:hover{
+  background:#edf3ff !important;
+  color:#173d91 !important;
+}
+
+.initiativeMixCardActions svg{
+  width:17px !important;
+  height:17px !important;
+
+  fill:none !important;
+  stroke:currentColor !important;
+  stroke-width:1.8 !important;
+  stroke-linecap:round !important;
+  stroke-linejoin:round !important;
+
+  pointer-events:none !important;
+}
+
+/*
+ * PNG capture excludes the toolbar through the existing
+ * html-to-image filter, while preserving the full panel.
+ */
+[data-atlas-png-staging]
+  .initiativeMixCardActions{
+  display:none !important;
+}
+
+@media(max-width:900px){
+  .initiativeMixExportHeader{
+    grid-template-columns:1fr auto !important;
+  }
+
+  .initiativeMixYearControl{
+    grid-column:1 !important;
+    grid-row:2 !important;
+    justify-self:start !important;
+  }
+
+  .initiativeMixCardActions{
+    grid-column:2 !important;
+    grid-row:1 / span 2 !important;
+  }
+}
+
+@media print{
+  .initiativeMixCardActions{
+    display:none !important;
+  }
+}
+
+
+
+/* =========================================================
+   Initiative Mix centered year selector and PNG controls
+   ========================================================= */
+
+.initiativeMixPngExportable{
+  position:relative !important;
+}
+
+.initiativeMixExportHeader{
+  display:grid !important;
+  grid-template-columns:minmax(320px,1fr) auto minmax(120px,1fr) !important;
+  align-items:center !important;
+  gap:18px !important;
+  position:relative !important;
+}
+
+/* Existing title/description remains on the left. */
+.initiativeMixExportHeader
+  > :not(.initiativeMixYearControl):not(.initiativeMixCardActions){
+  grid-column:1 !important;
+  min-width:0 !important;
+}
+
+/* Fiscal Year moves to the center. */
+.initiativeMixYearControl{
+  grid-column:2 !important;
+  grid-row:1 / span 2 !important;
+  justify-self:center !important;
+  align-self:center !important;
+  position:static !important;
+  inset:auto !important;
+  margin:0 !important;
+  transform:none !important;
+}
+
+/* Icons remain visible on the right. */
+.initiativeMixCardActions{
+  grid-column:3 !important;
+  grid-row:1 / span 2 !important;
+  justify-self:end !important;
+  align-self:center !important;
+
+  position:static !important;
+  inset:auto !important;
+
+  display:flex !important;
+  gap:7px !important;
+
+  margin:0 !important;
+  padding:0 !important;
+
+  opacity:1 !important;
+  visibility:visible !important;
+  transform:none !important;
+  pointer-events:auto !important;
+  z-index:50 !important;
+}
+
+.initiativeMixCardActions .executiveCardAction{
+  display:grid !important;
+  place-items:center !important;
+
+  width:34px !important;
+  height:34px !important;
+  min-width:34px !important;
+  min-height:34px !important;
+
+  padding:0 !important;
+  margin:0 !important;
+
+  border:1px solid #d7dfec !important;
+  border-radius:8px !important;
+
+  background:#fff !important;
+  color:#38527f !important;
+
+  box-shadow:0 3px 10px rgba(23,32,51,.14) !important;
+  cursor:pointer !important;
+}
+
+.initiativeMixCardActions .executiveCardAction:hover{
+  background:#edf3ff !important;
+  color:#173d91 !important;
+}
+
+.initiativeMixCardActions svg{
+  width:17px !important;
+  height:17px !important;
+  fill:none !important;
+  stroke:currentColor !important;
+  stroke-width:1.8 !important;
+  stroke-linecap:round !important;
+  stroke-linejoin:round !important;
+  pointer-events:none !important;
+}
+
+/* Do not include the icons in the exported image. */
+[data-atlas-png-staging] .initiativeMixCardActions{
+  display:none !important;
+}
+
+@media(max-width:900px){
+  .initiativeMixExportHeader{
+    grid-template-columns:1fr auto !important;
+  }
+
+  .initiativeMixYearControl{
+    grid-column:1 !important;
+    grid-row:2 !important;
+    justify-self:start !important;
+  }
+
+  .initiativeMixCardActions{
+    grid-column:2 !important;
+    grid-row:1 / span 2 !important;
+  }
+}
+
+@media print{
+  .initiativeMixCardActions{
+    display:none !important;
+  }
+}
+
+
+/* =========================================================
+   Initiative Mix header: title, centered year, PNG actions
+   ========================================================= */
+
+.projectMixPanel.initiativeMixPngExportable{
+  position:relative !important;
+}
+
+.projectMixHead.initiativeMixExportHeader{
+  display:grid !important;
+  grid-template-columns:
+    minmax(320px,1fr)
+    auto
+    minmax(120px,1fr) !important;
+  align-items:center !important;
+  gap:18px !important;
+}
+
+.projectMixHead.initiativeMixExportHeader > div:first-child{
+  grid-column:1 !important;
+  min-width:0 !important;
+}
+
+.projectMixHead .initiativeMixYearControl{
+  grid-column:2 !important;
+  justify-self:center !important;
+  position:static !important;
+  margin:0 !important;
+  transform:none !important;
+}
+
+.projectMixHead .initiativeMixCardActions{
+  grid-column:3 !important;
+  justify-self:end !important;
+  position:static !important;
+  inset:auto !important;
+
+  display:flex !important;
+  gap:7px !important;
+
+  margin:0 !important;
+  padding:0 !important;
+
+  opacity:1 !important;
+  visibility:visible !important;
+  transform:none !important;
+  pointer-events:auto !important;
+}
+
+.projectMixHead .initiativeMixCardActions
+.executiveCardAction{
+  display:grid !important;
+  place-items:center !important;
+
+  width:34px !important;
+  height:34px !important;
+  min-width:34px !important;
+  min-height:34px !important;
+
+  margin:0 !important;
+  padding:0 !important;
+
+  border:1px solid #d7dfec !important;
+  border-radius:8px !important;
+
+  background:#fff !important;
+  color:#38527f !important;
+
+  box-shadow:0 3px 10px rgba(23,32,51,.14) !important;
+  cursor:pointer !important;
+}
+
+.projectMixHead .initiativeMixCardActions
+.executiveCardAction:hover{
+  background:#edf3ff !important;
+  color:#173d91 !important;
+}
+
+.projectMixHead .initiativeMixCardActions svg{
+  width:17px !important;
+  height:17px !important;
+  fill:none !important;
+  stroke:currentColor !important;
+  stroke-width:1.8 !important;
+  stroke-linecap:round !important;
+  stroke-linejoin:round !important;
+  pointer-events:none !important;
+}
+
+[data-atlas-png-staging] .initiativeMixCardActions{
+  display:none !important;
+}
+
+@media(max-width:900px){
+  .projectMixHead.initiativeMixExportHeader{
+    grid-template-columns:1fr auto !important;
+  }
+
+  .projectMixHead .initiativeMixYearControl{
+    grid-column:1 !important;
+    grid-row:2 !important;
+    justify-self:start !important;
+  }
+
+  .projectMixHead .initiativeMixCardActions{
+    grid-column:2 !important;
+    grid-row:1 / span 2 !important;
+  }
+}

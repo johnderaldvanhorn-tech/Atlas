@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' https://*.supabase.co; font-src 'self' data:; object-src 'none'; base-uri 'self'">
   <title>ATLAS | Engineering &amp; Innovation Management</title>
-  <link rel="icon" type="image/png" href="assets/atlas-favicon.png?v=8.4.4">
-  <link rel="stylesheet" href="styles.css?v=8.4.4">
+  <link rel="icon" type="image/png" href="assets/atlas-favicon.png?v=8.5.3">
+  <link rel="stylesheet" href="styles.css?v=8.5.3.54">
 </head>
 <body>
 <div class="app">
   <aside id="appSidebar">
     <div class="brand atlasBrand">
-      <img class="atlasBrandLogo" src="assets/atlas-logo-sidebar.png?v=8.4.4" alt="ATLAS logo">
+      <img class="atlasBrandLogo" src="assets/atlas-logo-sidebar.png?v=8.5.3" alt="ATLAS logo">
       <div class="atlasBrandText">
         <strong>ATLAS</strong>
         <span>Engineering &amp; Innovation Management</span>
@@ -31,9 +31,18 @@
         <button data-view="development" class="navChild">⌘ Development Support</button>
         <button data-view="developmentRoadmap" class="navChild">▤ Development Roadmap</button>
       </div>
-      <button data-view="resources" class="navStandalone">♙ Resources</button>
-      <button data-view="reports" class="navStandalone">▦ Reports</button>
-      <button data-view="settings" class="navStandalone">⚙ Settings</button>
+      <div class="navGroup">
+        <div class="navLabel">Reports</div>
+        <button id="navExecutiveReport" data-view="reports" data-report-mode="executive" class="navChild">▦ Executive Report</button>
+        <button id="navYearQuarterReport" data-view="reports" data-report-mode="quarter" class="navChild">▦ Year / Quarter Report</button>
+      </div>
+
+      <div class="navGroup">
+        <div class="navLabel">Support</div>
+        <button data-view="scorecard" class="navChild">▦ Scorecard</button>
+        <button data-view="resources" class="navChild">♙ Resources</button>
+        <button data-view="settings" class="navChild">⚙ Settings</button>
+      </div>
     </nav>
     <div id="connectionBadge" class="connection offline">Loading Supabase…</div>
   </aside>
@@ -161,6 +170,7 @@
 
 
     <section id="reportsView" class="view hidden">
+      
       <section class="quarterReport" id="quarterReport">
         <div class="quarterReportHeader">
           <div><h1>Year / Quarter Report</h1><h2 id="quarterReportPeriod">Selected fiscal period</h2><p id="quarterReportDescription">Overview of project performance, timeline, and status for the selected fiscal period.</p></div>
@@ -185,6 +195,131 @@
         <div class="quarterReportFooter">
           <section><h3>Status Legend</h3><div class="quarterLegend"><span><b class="reportStatus completed">Completed</b><small>Project completed</small></span><span><b class="reportStatus in-process">In Process</b><small>Active and progressing</small></span><span><b class="reportStatus on-hold">On Hold</b><small>Paused or blocked</small></span><span><b class="reportStatus at-risk">At Risk</b><small>Schedule or delivery risk</small></span><span><b class="reportStatus not-started">Not Started</b><small>Work has not started</small></span></div></section>
           <section><h3 id="quarterReportSummaryTitle">Period Summary</h3><ul id="quarterReportSummary"></ul></section>
+        </div>
+      </section>
+
+      <section class="executiveReport hidden" id="executiveReport">
+        <div class="executiveReportHeader">
+          <div>
+            <span class="executiveEyebrow">ATLAS EXECUTIVE BRIEF</span>
+            <h1>Engineering &amp; Software Executive Report</h1>
+            <p id="executiveReportPeriod">Selected fiscal period</p>
+          </div>
+          <div class="executiveReportActions">
+            <span id="executiveReportGenerated"></span>
+            <button id="downloadExecutiveReportPdf" class="secondary exportCompactButton" type="button">PDF</button>
+          </div>
+        </div>
+
+        <div class="executiveControlPanel">
+          <label>Fiscal Year<select id="executiveReportYear"></select></label>
+          <label>Quarter<select id="executiveReportQuarter"><option value="all">Full Year</option><option value="1">Q1 — Oct–Dec</option><option value="2">Q2 — Jan–Mar</option><option value="3">Q3 — Apr–Jun</option><option value="4">Q4 — Jul–Sep</option></select></label>
+          <div class="executiveScorecardSource">
+            <span>Metric Source</span>
+            <strong>Scorecard</strong>
+          </div>
+          <div class="executiveScorecardSource">
+            <span>Scorecard Updated</span>
+            <strong id="executiveScorecardUpdated">No scorecard data</strong>
+          </div>
+        </div>
+
+        <section class="executiveHero">
+          <div class="executiveHeroCopy">
+            <span class="executiveSectionLabel">Executive summary</span>
+            <h2 id="executiveHeadline">Portfolio and software delivery remain focused on strategic growth.</h2>
+            <p id="executiveNarrative"></p>
+          </div>
+          <div class="executiveGrowthBlock">
+            <span>Recurring revenue growth</span>
+            <strong id="executiveGrowthValue">—</strong>
+            <small id="executiveGrowthCaption">Enter current and prior-year MRR</small>
+          </div>
+        </section>
+
+        <div id="executiveKpis" class="executiveKpis"></div>
+
+        <div class="executiveReportGrid">
+          <section class="executiveBoardCard executiveRevenueCard">
+            <div class="executiveCardHead"><div><span class="executiveSectionLabel">Backend software</span><h2>Recurring Revenue Guidance</h2></div><span class="executiveCardPeriod" id="executiveRevenuePeriod"></span></div>
+            
+            <div class="executiveRevenueTrendWrap">
+              <div class="executiveRevenueLegend">
+                <span><i class="mrrLegend"></i> Software MRR</span>
+                <span><i class="connectionLegend"></i> Connections</span>
+                <span><i class="trendLegend"></i> MRR trend</span>
+              </div>
+
+              <div
+                id="executiveRevenueTrendChart"
+                class="executiveRevenueTrendChart"
+                role="img"
+                aria-label="Software recurring revenue and connection-count trend"
+              ></div>
+
+              <div class="executiveRevenueSummary">
+                <div>
+                  <span>Current MRR</span>
+                  <strong id="executiveCurrentLabel">—</strong>
+                </div>
+
+                <div>
+                  <span>YTD MRR change</span>
+                  <strong id="executiveYtdChange">—</strong>
+                </div>
+
+                <div>
+                  <span>Connected endpoints</span>
+                  <strong id="executiveConnectionLabel">—</strong>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="executiveBoardCard">
+            <div class="executiveCardHead"><div><span class="executiveSectionLabel">Software update</span><h2>Recent Milestones</h2></div></div>
+            <div id="executiveMilestones" class="executiveDeliverableList"></div>
+          </section>
+
+          <section class="executiveBoardCard">
+            <div class="executiveCardHead"><div><span class="executiveSectionLabel">Next reporting period</span><h2>Upcoming Deliverables</h2></div></div>
+            <div id="executiveDeliverables" class="executiveDeliverableList"></div>
+          </section>
+
+          <section class="executiveBoardCard">
+            <div class="executiveCardHead"><div><span class="executiveSectionLabel">Management focus</span><h2>Risks &amp; Attention</h2></div></div>
+            <div id="executiveRisks" class="executiveDeliverableList"></div>
+          </section>
+        </div>
+      </section>
+    </section>
+
+
+    <section id="scorecardView" class="view hidden">
+      <section class="panel scorecardPanel">
+        <div class="panelHead toolbar scorecardHeader">
+          <div><h2>Executive Scorecard</h2><span>Weekly software performance scorecard used by executive reporting.</span></div>
+          <div class="scorecardActions">
+            <div class="scorecardPeriodControls" aria-label="Scorecard period navigation">
+              <button id="scorecardPreviousWeeks" type="button" title="Show eight earlier weeks">← Previous</button>
+              <label for="scorecardYear">Year
+                <select id="scorecardYear"></select>
+              </label>
+              <button id="scorecardCurrentWeeks" type="button">Current</button>
+              <button id="scorecardNextWeeks" type="button" title="Show the next year">Next →</button>
+            </div>
+            <button id="importScorecardCsv" class="secondary" type="button">Import CSV</button>
+            <button id="exportScorecardCsv" class="secondary" type="button">Export CSV</button>
+            <input id="scorecardCsvFile" type="file" accept=".csv,text/csv" hidden>
+            <button id="addScorecardMetric" class="primary" type="button">＋ Add Metric</button>
+          </div>
+        </div>
+        <div id="scorecardMessage" class="scorecardMessage" aria-live="polite"></div>
+        <div class="tableWrap">
+          <table class="scorecardTable">
+            <thead id="scorecardHead"></thead>
+            <tbody id="scorecardRows"></tbody>
+          </table>
         </div>
       </section>
     </section>
@@ -260,27 +395,46 @@
   </div>
 </form><div class="actions"><button id="deleteDevelopmentItem" class="danger hidden" type="button">Delete</button><span class="spacer"></span><button data-close="developmentOverlay" type="button">Cancel</button><button id="saveDevelopmentItem" class="primary" type="button">Save Item</button></div></div></div>
 
+
+<div id="scorecardOverlay" class="overlay hidden"><div class="drawer small"><div class="drawerHead"><div><h2 id="scorecardDrawerTitle">Add Scorecard Metric</h2><p>Create or update an executive KPI</p></div><button data-close="scorecardOverlay" class="icon">×</button></div><form id="scorecardForm" class="form">
+  <label>Metric Name<input id="scorecardMetricName" required placeholder="Software MRR"></label>
+  <div class="grid">
+    <label>Team<input id="scorecardTeam" placeholder="Product & Technology"></label>
+    <label>Category<input id="scorecardCategory" placeholder="Financial"></label>
+    <label>Owner<input id="scorecardOwner" placeholder="CTO"></label>
+    <label>Unit<select id="scorecardUnit"><option value="currency">Currency</option><option value="number">Number</option><option value="percent">Percent</option></select></label>
+    <label>Target Value<input id="scorecardTarget" type="number" step="any" min="0"></label>
+    <label>Current Value<input id="scorecardCurrent" type="number" step="any" min="0"></label>
+    <label>Average Value<input id="scorecardAverage" type="number" step="any" min="0"></label>
+    <label>Status<select id="scorecardStatus"><option>On Target</option><option>Needs Attention</option><option>Off Target</option></select></label>
+  </div>
+  <label>Executive Notes<textarea id="scorecardNotes" rows="4" placeholder="Context for executive reporting"></textarea></label>
+</form><div class="actions"><button id="deleteScorecardMetric" class="danger hidden" type="button">Delete Metric</button><span class="spacer"></span><button data-close="scorecardOverlay" type="button">Cancel</button><button id="saveScorecardMetric" class="primary" type="button">Save Metric</button></div></div></div>
+
 <div id="resourceOverlay" class="overlay hidden"><div class="drawer small"><div class="drawerHead"><div><h2>Resource</h2><p>Capacity and labor costing profile</p></div><button data-close="resourceOverlay" class="icon">×</button></div><form class="form"><label>Name<input id="resourceName"></label><label>Role<input id="resourceRole"></label><label>Department<input id="resourceDepartment"></label><label>Loaded hourly rate<input id="resourceRate" type="number" value="120"></label><label>Available hours per month<input id="resourceHours" type="number" value="140"></label></form><div class="actions"><button id="deleteResource" class="danger hidden" type="button">Delete Resource</button><span class="spacer"></span><button data-close="resourceOverlay" type="button">Cancel</button><button id="saveResource" class="primary" type="button">Save Resource</button></div></div></div>
 
-<script defer src="supabase-config.js?v=8.4.4"></script>
-<script defer src="supabase-client.js?v=8.4.4"></script>
-<script defer src="supabase-service.js?v=8.4.4"></script>
-<script defer src="version.js?v=8.4.4"></script>
-<script defer src="app.js?v=8.4.4"></script>
-<script defer src="v03.js?v=8.4.4"></script>
-<script defer src="v04.js?v=8.4.4"></script>
-<script defer src="v05.js?v=8.4.4"></script>
-<script defer src="v06.js?v=8.4.4"></script>
-<script defer src="v07.js?v=8.4.4"></script>
-<script defer src="v08.js?v=8.4.4"></script>
-<script defer src="v09.js?v=8.4.4"></script>
-<script defer src="v10.js?v=8.4.4"></script>
-<script defer src="v11.js?v=8.4.4"></script>
-<script defer src="v12.js?v=8.4.4"></script>
-<script defer src="v13.js?v=8.4.4"></script>
-<script defer src="v14.js?v=8.4.4"></script>
-<script defer src="v15.js?v=8.4.4"></script>
-<script defer src="development.js?v=8.4.4"></script>
-<script defer src="v16.js?v=8.4.4"></script>
-<script defer src="mobile.js?v=8.4.4"></script>
+<script defer src="supabase-config.js?v=8.5.3"></script>
+<script defer src="supabase-client.js?v=8.5.3"></script>
+<script defer src="supabase-service.js?v=8.5.3"></script>
+<script defer src="version.js?v=8.5.3"></script>
+<script defer src="app.js?v=8.5.3"></script>
+<script defer src="v03.js?v=8.5.3"></script>
+<script defer src="v04.js?v=8.5.3"></script>
+<script defer src="v05.js?v=8.5.3"></script>
+<script defer src="v06.js?v=8.5.3"></script>
+<script defer src="v07.js?v=8.5.3"></script>
+<script defer src="v08.js?v=8.5.3"></script>
+<script defer src="v09.js?v=8.5.3"></script>
+<script defer src="v10.js?v=8.5.3"></script>
+<script defer src="v11.js?v=8.5.3"></script>
+<script defer src="v12.js?v=8.5.3"></script>
+<script defer src="v13.js?v=8.5.3"></script>
+<script defer src="v14.js?v=8.5.3"></script>
+<script defer src="v15.js?v=8.5.3"></script>
+<script defer src="development.js?v=8.5.3"></script>
+<script defer src="v16.js?v=8.5.3"></script>
+<script src="vendor/html-to-image.js?v=1.11.13"></script>
+<script defer src="v17.js?v=8.5.3.55"></script>
+<script defer src="mobile.js?v=8.5.3"></script>
+<script defer src="scorecard.js?v=8.5.3.16"></script>
 </body></html>
